@@ -1,0 +1,33 @@
+
+打开app 的UI界面 /home/tjr/android-sdk-linux/tools
+./uiautomatorviewer
+方法一（最简单有效的方法）
+
+通过cmd命令，前提是先打开手机中你要获取包名的APP
+
+1. adb shell
+
+2. dumpsys activity | grep mFocusedActivity
+
+
+
+
+sudo cp -Rf /home/tjr/node-v10_9/lib /usr/local/
+sudo cp -Rf /home/tjr/node-v10_9/share /usr/local/
+
+
+sudo cp -Rf /home/tjr/node-v10_9/include /usr/local/
+
+sudo apt-get install npm
+
+
+sudo ln -s /home/tjr/protobuf-3.5.1/bin/protoc  /usr/local/bin/protoc
+
+export PATH=$PATH:/home/tjr//protobuf-3.5.1/bin/
+export PKG_CONFIG_PATH=/home/tjr//protobuf-3.5.1/lib/pkgconfig/
+
+stf local   --allow-remote
+
+stf local --public-ip 192.168.157.133 --allow-remote
+
+rethinkdb --bind all 

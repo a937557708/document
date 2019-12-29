@@ -1,0 +1,1 @@
+gedit:Linux打开文档 ，gedit  ./test.txt

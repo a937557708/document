@@ -1,0 +1,126 @@
+1. Bus 中央事件总线
+非父子组件传值，可以使用一个空的 Vue 实例作为中央事件总线，结合实例方法?$on?和?$emit?完成传值操作。
+Bus 的定义方式有以下三种：
+
+将?Bus?抽离出来，组件有需要时进行引入。
+// Bus.js
+import Vue from 'vue'
+const Bus = new Vue()
+
+export default Bus
+
+将?Bus?挂载到 Vue 根实例的原型上。
+import Vue from 'vue'
+V
+Vue.prototype.$bus = new Vue();
+
+将?Bus?注入到 Vue 根对象上。
+import Vue from 'vue'
+const Bus = new Vue()
+
+new Vue({
+ 
+  el:'#app',
+ 
+  data: {
+ 
+    Bus
+ 
+  }　　
+}
+})
+下面案例中的?Bus?挂载在 Vue 原型上：
+// 组件1 使用 $emit 向外部发布自定义事件
+<
+<template>
+ 
+  <button @click="handleClick"> Send Message</button>
+<
+</template>
+<
+<script>
+e
+export default {
+ 
+  data() {
+ 
+    return {
+ 
+      message: "给兄弟组件传值",
+ 
+    }
+ 
+  },
+ 
+  methods: {
+ 
+    handleClick() {
+ 
+      this.$Bus.$emit("sendMessage", this.message)
+ 
+    }
+ 
+  }
+}
+}
+<
+</script>
+
+
+
+// 组件2 使用 $on 订阅外部发布的事件
+<
+<template>
+ 
+  <div>
+    {{data}}
+ 
+  </div>
+<
+</template>
+<
+<script>
+e
+export default {
+ 
+  data() {
+ 
+    return {
+ 
+      data: "",
+ 
+    }
+ 
+  },
+ 
+  mounted() {
+ 
+    this.$Bus.$on("sendMessage", data => {
+ 
+      this.data = data;
+ 
+    })
+ 
+  }
+}
+}
+<
+</script>
+注意：注册的?Bus?要在组件销毁时卸载，否则会多次挂载，造成触发一次但多个响应的情况。
+beforeDestroy () {
+ 
+  this.$Bus.$off('sendMessage', this.message);
+}
+}
+2. Vuejs中父组件主动调用子组件的方法
+首先在子组件中进行事件广播
+created: function(){
+    this.$on('handleChange', function(){
+      console.log('something handled!');
+    });
+  }
+ this.$off('handleChange', this.message);
+}//在组件销毁时卸载
+在父组件中指定子组件的ref，如child，然后通过一下方式调用：
+this.$refs['child'].$emit('handleChange');
+

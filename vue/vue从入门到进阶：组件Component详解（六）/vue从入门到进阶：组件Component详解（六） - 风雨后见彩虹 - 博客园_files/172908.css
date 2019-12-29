@@ -1,0 +1,407 @@
+finput{-webkit-appearance:none;}
+*{transition: all .3s;}
+body{background:#ececec;font-family: '微软雅黑';}
+#header{overflow:hidden;position:relative;width: 100%;box-sizing: border-box;padding:0 60px;background:#000;}
+#blogTitle{float:left;height:44px;line-height:44px;width:130px;background:none;}
+#lnkBlogLogo{display:none;}
+#blogTitle h1{width:100%;margin:0;height:44px;line-height:44px;}
+.postTitle a:link, .postTitle a:visited, .postTitle a:active{color:#302d2d}
+.postTitle a:hover{margin-left:0;color: #f60;}
+.c_b_p_desc{color:#211d1d;}
+
+#Header1_HeaderTitle{color:#44ad10;}
+#blogTitle h2{color:#999;display:none;}
+.blogStats{display:none;}
+#navigator{float:left;height:44px;line-height:44px;clear:none;}
+#navList{margin-left:24px;}
+#navList a{height:44px;font-weight:bold;font-size:16px;}
+#navList a:link, #navList a:visited, #navList a:active{color:#fff;}
+#main{width:100%;box-sizing:border-box;max-width:1600px;margin:24px auto;border-radius: 6px;padding:0 60px;}
+#sideBar{width:395px;padding:0;margin-top:20px;background:#fff;
+font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;float:right;
+}
+#sideBar #sideBarMain{padding:0 24px 20px;width:350px;/*border-left:1px solid #ccc;*/}
+.catListTitle{border-top-left-radius:0;border-top-right-radius:0;   
+
+ background: none;
+    border-bottom: 0;
+    color: #000;
+    text-shadow: none;
+    font-weight: bold;
+
+}
+.catListEssay, .catListLink, .catListNoteBook, .catListTag, .catListPostCategory, .catListPostArchive, .catListImageCategory, .catListArticleArchive, .catListView, .catListFeedback, .mySearch, .catListComment, .catListBlogRank, .catList, .catListArticleCategory{
+background:none;}
+.catListPostCategory ul li a{font-size:14px;}
+
+.newsItem, #blog-calendar{box-shadow:none;padding:0;}
+
+#blog-calendar{background:#fff;}
+#blog-calendar .CalTodayDay a{color:#fff;color:#f60}
+ #blog-calendar table{ border-spacing: 2px;}
+ #blog-calendar th{background-color: #fbfbfb;}
+ #blog-calendar th, #blog-calendar td{padding: 5px 3px;border: 1px solid #eee;}
+#blog-calendar td a{font-weight:bold;color:#59a020;}
+ #blog-calendar .CalTitle td{text-align:center;}
+.input_my_zzk{height:30px;line-height:30px;width:140px;padding:0 5px;border:1px solid #ccc;}
+input.btn_my_zzk{background: #e6e6e6; color: #666;height: 32px;border: 1px solid #ccc;line-height: 32px;margin-left: 0px;cursor:pointer;width:76px;}
+input.btn_my_zzk:hover{background:#ccc;}
+
+.catListEssay, .catListLink, .catListNoteBook, .catListTag, .catListPostCategory, .catListPostArchive, .catListImageCategory, .catListArticleArchive, .catListView, .catListFeedback, .mySearch, .catListComment, .catListBlogRank, .catList, .catListArticleCategory{
+    box-shadow:none;
+    border-radius:0;
+}
+.sidebar-block ul{overflow:hidden;}
+.catListPostCategory ul li,.catList ul li{width:50%;box-sizing:border-box;float:left;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-indent:1em;padding:10px 0;border-bottom:0;}
+.sidebar-block ul li{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;border-bottom:0;}
+
+#mainContent{margin-left:-400px;margin-right:0;background:#fff;    margin-left: 0;margin-right: -400px;float: left;}
+#mainContent .forFlow{margin-left:400px;padding-top:20px;margin-left:0;margin-right:400px;}
+
+.day{border-radius:0;box-shadow:none;margin-bottom:0;padding-bottom:0;}
+.dayTitle,.postSeparator{display:none;}
+.postTitle{border-bottom:0;padding-bottom:10px;font-size:20px;line-height:1;}
+.postDesc{border-bottom:1px solid #ccc;margin-bottom:30px;color:#666;}
+.postDesc a{color:#006600;}
+.forFlow .day:first-child .postTitle:nth-child(1){margin-top:0;}
+
+/**列表页样式*/
+.entrylistTitle, .PostListTitle, .thumbTitle{font-size:22px;}
+.entrylistPosttitle{font-size:20px;border-bottom:0;margin-top: 30px; padding-bottom: 10px; line-height: 1;}
+a.entrylistItemTitle{transition: all 0.4s linear 0s;color:#302d2d}
+a.entrylistItemTitle:hover{margin-left: 0;}
+.entrylistItemPostDesc{border-bottom:1px solid #ccc;padding-right: 5px;color: #A8B1BA; line-height: 2.5em;}
+
+#AjaxHolder_UpdatePanel1, #AjaxHolder_PostComment_divCommnentArea, #profile, .entrylist, .gallery{box-shadow:none;padding: 10px 20px 10px 10px;}
+
+
+#cnblogs_post_body {font-family: 'Microsoft Yahei'; font-size: 14px;font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;}
+#cnblogs_post_body p{word-wrap: break-word;    text-align: justify;}
+#cnblogs_post_body code{
+   padding: 2px 4px;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+}
+#cnblogs_post_body img{padding: 3px;border: 1px solid #ddd;}
+.cnblogs_code{background: #272822;font-size: 14px!important;padding:2px 15px;border-left: 3px solid #390;}
+.cnblogs_code pre,.cnblogs_code span{font-size: 14px!important;  }
+.cnblogs_code .hljs{line-height: 1.5!important;display:block;max-height:720px; font-family: "Courier New",sans-serif!important;}
+.postBody{border-bottom:0;}
+.postBody li, .postCon li{margin-bottom:5px;}
+
+#cnblogs_post_body h1{background: none;color: #000;border-bottom: 1px solid #eee;font-size: 32px;font-weight: bold;margin: 20px 0 20px !important;padding: 0;}
+#cnblogs_post_body h2{color: #333;border-bottom: 1px solid #999;font-size: 28px;font-weight: bold;padding:0px 5px 10px;margin: 25px 0 10px !important;background: none;}
+#cnblogs_post_body h3{background: none;border-bottom: 0;font-size: 22px;font-weight: bold;margin: 20px 0 20px !important;padding:0; color:#000;}
+#cnblogs_post_body h4{font-size:18px;font-weight:bold;}
+#cnblogs_post_body a{color:#390;}
+#cnblogs_post_body a:hover{color:#f60}
+
+#topics{box-shadow:none;}	
+#topics .postTitle{line-height:1;border-bottom:0;font-size:28px;}
+#topics .postTitle a:hover{margin-left:0;}
+#topics .postDesc{text-align:left;box-sizing:border-box;}
+#topics .postDesc a{color:#390}
+#topics .postDesc a:hover{color:#f60}
+#green_channel{background:#eee;border:0;width:100%;}
+
+#topics .postBody blockquote{
+   border-left:5px solid #390;
+    margin: 20px 0;
+    padding-left: 10px;
+    background: #f6f6f6;
+    color: #555;
+  position:relative;
+  padding:10px 20px;
+  font-size:14px;
+  line-height:24px;
+}
+#topics .postBody blockquote p{
+  margin:0;
+}
+.postBody blockquote::before, .postCon blockquote::before {
+    position: absolute;
+    top: 12px;
+    left: -12px;
+    background-color: #390;
+    color: #fff;
+    content: "!";
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+#MySignature{
+	background: #eee url(//images.cnblogs.com/cnblogs_com/moqiutao/740438/o_o_o_info.png) no-repeat 10px center;
+    border-left: 5px solid #390;
+  padding-left:55px;
+}
+#MySignature .content {
+    padding: 10px;
+    padding-left: 20px;
+    font-size:14px;
+    color:#666;
+    line-height: 1.8;
+}
+#MySignature .content a{color:#390;text-decoration:none;}
+#MySignature .content a:hover{color:#f60}
+#EntryTag,#BlogPostCategory{font-size:16px;}
+.author_profile_info a{color:#4baa1b;font-size:14px;}
+.author_profile_info a:hover{color:#390}
+#author_profile_follow a{font-size:14px;}
+#post_next_prev{font-size:14px;}
+
+.diggit{float:none;width:120px;height:100px;background:url(https://files.cnblogs.com/files/moqiutao/likepic.gif) no-repeat;}
+.diggnum { color: #390;font-size: 32px;}
+
+@media (max-width: 768px){
+#main{margin-top:0;}
+  #header{width:100%;padding:0;}
+  #blogTitle{width:100%;padding:0;}
+  #blogTitle h2{width:100%;}
+   #navigator{width:100%;padding:0;}
+   #main{max-width:100%;}
+   #sideBar{padding:0;}
+  #MySignature{display:none;}
+#mainContent{margin-right:0;}
+  #mainContent .forFlow{margin:0;    margin-left: 0 !important;}
+  .c_b_p_desc,.postDesc{display:none;}
+.postTitle{font-size:16px;}
+#sideBar{border-left:0;width:100% !important;;}
+.article-btm{display:none;}
+#topics .postTitle{font-size:20px;}
+#cnblogs_post_body h2{font-size:18px;}
+#cnblogs_post_body h3{font-size:16px;}
+#comment_form{display:none;}
+}
+@media (max-width: 1360px){
+   #navigator{width:100%;padding:0;}
+   #main{max-width:100%;}
+   #sideBar{/*padding:0 24px;*/}
+}
+/*
+ 代码高亮开始，使用了一个叫Monokai Sublime的黑色主题皮肤，直接拿过来还不行，有一些样式冲突，还要自己稍微改一些地方
+Monokai Sublime style. Derived from Monokai by noformnocontent //nn.mit-license.org/
+*/
+pre {
+/*控制代码不换行*/
+    white-space: pre;
+    word-wrap: normal;
+   white-space:nowrap;
+}
+.cnblogs-markdown .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #23241f !important;
+    color: #FFF;
+    white-space: pre;
+    word-break: normal;
+}
+
+.hljs,
+.hljs-tag,
+.hljs-subst {
+  color: #f8f8f2;
+}
+
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-quote,
+.hljs-number,
+.hljs-regexp,
+.hljs-literal,
+.hljs-link {
+  color: #ae81ff;
+}
+
+.hljs-code,
+.hljs-title,
+.hljs-section,
+.hljs-selector-class {
+  color: #a6e22e;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-attr {
+  color: #f92672;
+}
+
+.hljs-symbol,
+.hljs-attribute {
+  color: #66d9ef;
+}
+
+.hljs-params,
+.hljs-class .hljs-title {
+  color: #f8f8f2;
+}
+
+.hljs-string,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-selector-id,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-variable {
+  color: #e6db74;
+}
+
+.hljs-comment,
+.hljs-deletion,
+.hljs-meta {
+  color: #75715e;
+}
+
+/*黑色主题皮肤结束*/
+.buryit{display:none;}
+.c_ad_block{}
+#ad_t2,.c_ad_block{margin:5px 15px;}
+#ad_t2 a,#c_ad_block,#under_post_news,#under_post_kb{font-size:16px;}
+#blog-comments-placeholder{border: solid 1px #CCC;margin: 10px 15px;border-radius: 5px;}
+.feedback_area_title {
+    margin: 0px;
+    background: #EDEDED;
+    padding: 10px 10px;
+    color: #272727;
+    font-weight: normal;
+    border-bottom: solid 1px #ccc;
+   font-size:1.2em;
+  margin-top:-17px;
+}
+.feedbackListSubtitle a.layer {
+    background: #B2E866;
+    color: #414141 !important;
+    padding: 2px 4px;
+    border-radius: 2px;
+    margin-right: 4px;
+    /* display: none; */
+}
+.louzhu{color: #0AB300;}
+.feedbackItem {margin: 1em;}
+#comment_form_container,#comment_nav{margin:0 15px;}
+#btn_comment_submit {
+    border: solid 1px #390;
+    padding: 8px 20px;
+    width: auto;
+    height: auto;
+    color: #fff;
+    background-color: #390;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.catListEssay ul li a, .catListLink ul li a, .catListNoteBook ul li a, .catListTag ul li a, .catListPostCategory ul li a, .catListPostArchive ul li a, .catListImageCategory ul li a, .catListArticleArchive ul li a, .catListView ul li a, .catListFeedback ul li a, .catListComment ul li a, .catListBlogRank ul li a, .catList ul li a .catListArticleCategory ul li a{font-size:14px;}
+/*
+ 代码高亮开始，使用了一个叫Monokai Sublime的黑色主题皮肤，直接拿过来还不行，有一些样式冲突，还要自己稍微改一些地方
+Monokai Sublime style. Derived from Monokai by noformnocontent //nn.mit-license.org/
+*/
+
+.cnblogs_code span,.cnblogs_code pre{/*font-size: 14px !important;*/overflow: auto;
+    white-space: pre;/*max-height:600px;*/}
+
+pre {
+/*控制代码不换行*/
+    white-space: pre;
+    word-wrap: normal;
+}
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #272822;
+}
+
+.hljs,
+.hljs-tag,
+.hljs-subst {
+  color: #f8f8f2;
+  /*color:#a6e22e;*/
+}
+
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-quote,
+.hljs-number,
+.hljs-regexp,
+.hljs-literal,
+.hljs-link {
+  color: #ae81ff;
+}
+
+.hljs-code,
+.hljs-title,
+.hljs-section,
+.hljs-selector-class {
+  color: #a6e22e;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-attr {
+  color: #f92672;
+}
+
+.hljs-symbol,
+.hljs-attribute {
+  color: #66d9ef;
+}
+
+.hljs-params,
+.hljs-class .hljs-title {
+  color: #f8f8f2;
+}
+
+.hljs-string,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-selector-id,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-variable {
+  color: #e6db74;
+}
+
+.hljs-comment,
+.hljs-deletion,
+.hljs-meta {
+  color: #75715e;
+}
+
+/*黑色主题皮肤结束*/

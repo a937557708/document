@@ -1,0 +1,99 @@
+WebDriver如何切换到新打开的窗口中\
+
+<span style="font-family:Courier New;font-size:12px;">package com.test;
+ 
+import java.util.ArrayList;
+import java.util.Set;
+ 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+ 
+public class SwithWindow {
+	WebDriver driver = null;
+	ArrayList<String> list = new ArrayList<String>();
+	
+	@BeforeTest
+	public void beforeTest() {
+		System.setProperty("webdriver.chrome.driver",
+				"./lib/driver/chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+ 
+	@Test
+	public void test3() throws InterruptedException {
+		driver.get("file:///D:/demo.html");
+		String oriWin = driver.getWindowHandle();
+		System.out.println("原始窗口为："+oriWin);
+		list.add(oriWin);
+		driver.findElement(By.xpath("//div[@id='open']/a")).click();
+		Thread.sleep(1000);
+		Set<String> handles = driver.getWindowHandles();
+		for(String handle : handles) {
+			if(list.indexOf(handle) == -1) {
+				WebDriverWait wait = new WebDriverWait(driver, 3);
+				wait.until(new ExceptWindow(handle));
+				System.out.println(handle);
+				list.add(handle);
+			}
+		}
+		System.out.println("已经切换到了"+ driver.getWindowHandle());
+	}
+	
+	@AfterTest(alwaysRun = true)
+	public void afterTest() {
+		driver.quit();
+	}
+	
+	static class ExceptWindow implements ExpectedCondition<WebDriver> {
+		private String id;
+		public ExceptWindow(String id) {
+			this.id = id;
+		}
+ 
+		@Override
+		public WebDriver apply(WebDriver d) {
+			return d.switchTo().window(id);
+		}
+	}
+}
+ 
+</span>
+
+　　　　　　//标题是不是“百度一下，你就知道”
+18         new WebDriverWait(driver,5).until(ExpectedConditions.titleIs("百度一下，你就知道"));
+19         //标题是不是包含“百度一下”
+20         new WebDriverWait(driver,5).until(ExpectedConditions.titleContains("百度一下"));
+21         //判断该元素是否被加载在DOM中，并不代表该元素一定可见        
+22         new WebDriverWait(driver,5).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=‘kw‘]")));
+23         //判断元素(定位后)是否可见
+24         new WebDriverWait(driver,5).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=‘kw‘]"))));
+25         //判断元素是否可见（非隐藏，并且元素的宽和高都不等以0）
+26         new WebDriverWait(driver,5).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=‘kw‘]")));
+27         //只要存在一个就是true
+28         ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id=‘kw‘]"));
+29         //元素中的text是否包含参数中的的字符串
+30         ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=‘kw‘]"), "百度一下");
+31         //元素的value属性中是否包含参数中的字符串
+32         ExpectedConditions.textToBePresentInElementValue(By.xpath("//*[@id=‘kw‘]"), "***");
+33         //判断该表单是否可以切过去，可以就切过去并返回true，否则放回false
+34         ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("**"));
+35         //判断某个元素是否不存在于DOM或不可见
+36         ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=‘kw‘]"));
+37         //判断元素是否可以点击
+38         ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=‘kw‘]"));
+39         //等到一个元素从DOM中移除
+40         ExpectedConditions.stalenessOf(driver.findElement(By.xpath("//*[@id=‘kw‘]")));
+41         //判断某个元素是否被选中，一般用在下拉列表
+42         ExpectedConditions.elementToBeSelected(By.xpath("//*[@id=‘kw‘]"));
+43         //判断某个元素的选中状态是否符合预期
+44         ExpectedConditions.elementSelectionStateToBe(By.xpath("//*[@id=‘kw‘]"), true);
+45         //判断某个元素(已定位)的选中状态是否符合预期
+46         ExpectedConditions.elementSelectionStateToBe(driver.findElement(By.xpath("//*[@id=‘kw‘]")), false);
+47         //判断页面中是否存在alert
+48         new WebDriverWait(driver,5).until(ExpectedConditions.alertIsPresent());

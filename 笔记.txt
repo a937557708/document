@@ -1,0 +1,66 @@
+无代码编程  https://segmentfault.com/a/1190000018785505
+技术网  https://kiwenlau.com/page/3/
+前端跨页面通信，你知道哪些方法？ https://segmentfault.com/a/1190000018731597
+在线工具  https://tool.lu/c/developer
+基于规则评分的密码强度检测算法分析及实现   https://30ke.cn/doc/pass-strength
+   https://30ke.cn/code/pass-strength/case1-demo
+﻿WebPageTest本地部署  https://www.jianshu.com/p/ba1d3451390f  https://www.cnblogs.com/strick/p/6634637.html
+mendix https://cloud.tencent.com/developer/news/328922
+解压zip:https://www.cnblogs.com/mao2080/p/7435268.html
+
+3、台湾小凡 vue.js 教学视频
+
+github主页：https://github.com/bhnddowinf/vuejs-learn
+流程图：https://www.processon.com/diagraming/5bec1575e4b027a022a4b303
+RestTemple+Ribbon+Feign: http://www.cnblogs.com/okong/p/springcloud-four.html
+elasticsearch查询 ： https://blog.csdn.net/donghaixiaolongwang/article/details/57418306
+  http://coyee.com/article/10764-23-useful-elasticsearch-example-queries
+  http://www.it1352.com/671418.html
+Spring Boot 揭秘与实战 系列  http://blog.720ui.com/columns/springboot_all/
+	快速上手篇
+		Spring Boot 揭秘与实战（一） 快速上手 http://blog.720ui.com/2016/springboot_01_quickstart/
+	数据存储篇
+		Spring Boot 揭秘与实战（二） 数据存储篇 - MySQL http://blog.720ui.com/2016/springboot_02_data_jdbc/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - 数据访问与多数据源配置 http://blog.720ui.com/2016/springboot_02_data_datasource/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - MyBatis整合 http://blog.720ui.com/2016/springboot_02_data_mybatis/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - JPA整合 http://blog.720ui.com/2017/springboot_02_data_jpa/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - Redis http://blog.720ui.com/2016/springboot_02_data_redis/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - MongoDB http://blog.720ui.com/2016/springboot_02_data_mongodb/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - ElasticSearch http://blog.720ui.com/2016/springboot_02_data_elasticsearch/
+		Spring Boot 揭秘与实战（二） 数据存储篇 - 声明式事务管理  http://blog.720ui.com/2017/springboot_02_data_transactional/
+	数据缓存篇
+		Spring Boot 揭秘与实战（二） 数据缓存篇 - 快速入门 http://blog.720ui.com/2017/springboot_02_data_cache_concurrenmapcache/
+		Spring Boot 揭秘与实战（二） 数据缓存篇 - EhCache http://blog.720ui.com/2017/springboot_02_data_cache_ehcache/
+		Spring Boot 揭秘与实战（二） 数据缓存篇 - Guava Cache http://blog.720ui.com/2017/springboot_02_data_cache_guavacache/
+		Spring Boot 揭秘与实战（二） 数据缓存篇 - Redis Cache http://blog.720ui.com/2017/springboot_02_data_cache_rediscache/
+	日志框架篇
+		Spring Boot 揭秘与实战（三） 日志框架篇 - 如何快速集成日志系统   http://blog.720ui.com/2016/springboot_03_logging/
+	配置文件篇
+		Spring Boot 揭秘与实战（四） 配置文件篇 - 有哪些很棒的特性 http://blog.720ui.com/2016/springboot_04_properties/
+	服务器篇
+		Spring Boot 揭秘与实战（五） 服务器篇 - 内嵌的服务器 Tomcat剖析 http://blog.720ui.com/2016/springboot_05_server_tomcat/
+		Spring Boot 揭秘与实战（五） 服务器篇 - Tomcat 代码配置 http://blog.720ui.com/2017/springboot_05_server_tomcat_embeddedfactory/
+		Spring Boot 揭秘与实战（五） 服务器篇 - 其他内嵌服务器 http://blog.720ui.com/2017/springboot_05_server_jetty_undertow/
+		Spring Boot 揭秘与实战（五） 服务器篇 - Tomcat 启用 HTTPS  http://blog.720ui.com/2017/springboot_05_server_tomcat_https/
+	消息队列篇
+		Spring Boot 揭秘与实战（六） 消息队列篇 - RabbitMQ http://blog.720ui.com/2017/springboot_06_mq_rabbitmq/
+	实用技术篇
+		Spring Boot 揭秘与实战（七） 实用技术篇 - FreeMarker 模板引擎 http://blog.720ui.com/2017/springboot_07_othercore_freemarker/
+		Spring Boot 揭秘与实战（七） 实用技术篇 - Java Mail 发送邮件 http://blog.720ui.com/2017/springboot_07_othercore_javamail/
+		Spring Boot 揭秘与实战（七） 实用技术篇 - 异步任务 http://blog.720ui.com/2017/springboot_07_othercore_async/
+		Spring Boot 揭秘与实战（七） 实用技术篇 - StateMachine 状态机机制 http://blog.720ui.com/2017/springboot_07_othercore_statemachine/
+	发布与部署
+		Spring Boot 揭秘与实战（八） 发布与部署 - 开发热部署 http://blog.720ui.com/2017/springboot_08_deploy_autoload/
+		Spring Boot 揭秘与实战（八） 发布与部署 - 远程调试 http://blog.720ui.com/2017/springboot_08_remote_debug/
+	应用监控篇
+		Spring Boot 揭秘与实战（九） 应用监控篇 - HTTP 应用监控 http://blog.720ui.com/2017/springboot_09_actuator_http/
+		Spring Boot 揭秘与实战（九） 应用监控篇 - HTTP 健康监控 http://blog.720ui.com/2017/springboot_09_actuator_http_healthindicator/
+		Spring Boot 揭秘与实战（九） 应用监控篇 - 自定义监控端点 http://blog.720ui.com/2017/springboot_09_actuator_endpoint/
+	源码分析篇
+		Spring Boot 揭秘与实战 源码分析 - 开箱即用，内藏玄机 http://blog.720ui.com/2016/springboot_source_autoconfigure/
+		Spring Boot 揭秘与实战 源码分析 - 工作原理剖析 http://blog.720ui.com/2017/springboot_source_autoconfigure_run/
+		Spring Boot 揭秘与实战 自己实现一个简单的自动配置模块 http://blog.720ui.com/2017/springboot_source_autoconfigure_custom/
+	附录
+		Spring Boot 揭秘与实战 附录 - Spring Boot 公共配置  http://blog.720ui.com/2016/springboot_appendix_common_application_properties/
+     源代码
+		相关示例完整代码： springboot-action https://github.com/lianggzone/springboot-action

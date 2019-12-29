@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.cnblogs.com/moqiutao/p/8328931.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+<title>vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园</title>
+<meta property="og:description" content="一.什么是组件？ 组件 (Component) 是 Vue.js 最强大的功能之一。组件可以扩展 HTML 元素，封装可重用的代码。在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功">
+<link type="text/css" rel="stylesheet" href="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/bundle-darkgreentrip.css">
+<link type="text/css" rel="stylesheet" href="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/172908.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/bundle-darkgreentrip-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/moqiutao/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/moqiutao/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/moqiutao/wlwmanifest.xml">
+<script async="" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/analytics.js"></script><script type="text/javascript" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/encoder.js"></script><script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'moqiutao', cb_enable_mathjax=true;var isLogined=false;</script>
+<script type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'blogpost-body', processEscapes: true },
+        TeX: { 
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+            'HTML-CSS': { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } }
+        });
+    </script><script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/MathJax.js"></script>
+<script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/blog-common.js" type="text/javascript"></script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+<!--PageBeginHtml Block Begin-->
+<script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/highlight.pack.js"></script>
+<script>
+$(document).ready(function() {
+
+hljs.initHighlightingOnLoad();
+});
+
+$(document).ready(function() {
+  $('pre').each(function(i, block) {
+   $(this).find('span').removeAttr('style');
+    hljs.highlightBlock(block);
+  });
+ $(".cnblogs_code_toolbar").remove();
+});
+
+</script>
+
+<script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/bootstrap.scrollspy.js"></script>
+<script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/generateDirTitle.js"></script>
+<script src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/generateDir.js"></script>
+<style>
+.generationcatListTitle{font-weight:bold;font-size: 2em; margin-bottom: 5px;}
+.postBody .directoryDiv {/*background: #F6F6F6;*/ padding: 10px 0 20px 10px;border-radius: 5px;box-shadow: 0 1px 4px #827f7f;}
+.postBody .directoryDiv a{text-decoration:none;border-bottom: 1px dotted #333;/*border-bottom:0;color:#390;*/}
+.postBody .directoryDiv a:hover{color:red;border-bottom: 1px dotted red;}
+.directoryDiv .listCon>ul>li>a{}
+
+
+#sideBar{position: relative;border-left:1px solid #e9e9e9}
+#sideBar .directoryDiv ul{padding:0;/*list-style-type: square;*/list-style-type:none;}
+#sideBar .directoryDiv ul.nav{position:relative;z-index:2;font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;}
+#sideBar li{/*list-style-type:square;list-style-position: inside;*/padding-left:18px;color:#009a61;}
+#sideBar .directoryDiv ul li a{position: relative;padding:3px 0;color:#000;display:block;text-decoration: none;/*white-space:nowrap;text-overflow:ellipsis;overflow:hidden;*/font-size:14px;box-sizing:border-box;}
+#sideBar .directoryDiv ul li a:before{content:'';position:absolute;left:-10px;top:11px;width:5px;height:5px;background:#000;}
+#sideBar .directoryDiv ul li.active-current a:before{background:#009a61}
+#sideBar .directoryDiv{width:100%;background:#fff;width:370px;}
+#sideBar .directoryDiv .dirInner{padding:0 12px;overflow:hidden;position:relative;}
+#sideBar .directoryDiv .dirInner:before{content:'';position:absolute;top:0;left:0;width:3px; height:100%;background:#ddd;}
+#sideBar .directoryDiv .dirInner .highlight-title{
+	position:absolute;left: 0;
+    right: 0;
+    background: #f3f3f3;
+    z-index: 1;
+    border-left: 3px solid #009A61;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+#sideBar .directoryDiv .dirInner .listCon{overflow:hidden;height:100%;background:#fff;}
+#sideBar .directoryDiv ul li.active-current>a{color:#009a61;}
+#sideBar .directoryDiv ul li a:hover{color:#000;text-decoration: underline;}
+#sideBar .directoryDiv ul li.active-current a:hover{color:#009a61;}
+#sideBar .directoryDiv.fixed{position:fixed;top:0;width:370px;/*overflow:hidden;*/z-index:9999}
+@media (max-width: 768px){
+#sideBar{border-left:0;width:100% !important;;}
+
+}
+</style>
+<!--PageBeginHtml Block End-->
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/moqiutao/"><img id="blogLogo" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/moqiutao/">风雨后见彩虹</a></h1>
+<h2>无论什么时候开始，重要的是不要停止。</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/moqiutao/">首页</a></li>
+<li></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E9%A3%8E%E9%9B%A8%E5%90%8E%E8%A7%81%E5%BD%A9%E8%99%B9">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/moqiutao/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/moqiutao/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 321&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 84</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/moqiutao/p/8328931.html">vue从入门到进阶：组件Component详解（六）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody"><div class="parentsDiv"><div class="directoryDiv"><div class="generationcatListTitle">文章目录</div><div class="dirInner" style="top: 0px;"><div class="highlight-title" style="height: 0px; top: 1274px;"></div><div class="listCon"><ul data-level="1" class="nav"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader0" id="articleHeader0title">一.什么是组件？</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader1" id="articleHeader1title">二.注册组件</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader2" id="articleHeader2title">全局注册</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader3" id="articleHeader3title">局部注册</a></li></ul></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader4" id="articleHeader4title">三.Prop</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader5" id="articleHeader5title">使用 Prop 传递数据</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader6" id="articleHeader6title">动态 Prop</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader7" id="articleHeader7title">字面量语法 vs 动态语法</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader8" id="articleHeader8title">单向数据流</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader9" id="articleHeader9title">Prop 验证</a></li></ul></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader10" id="articleHeader10title">四.非Prop特性</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader11" id="articleHeader11title">五.自定义事件</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader12" id="articleHeader12title">使用 v-on 绑定自定义事件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader13" id="articleHeader13title">给组件绑定原生事件.native</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader14" id="articleHeader14title">.sync 修饰符(2.3.0+)</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader15" id="articleHeader15title">使用自定义事件的表单输入组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader16" id="articleHeader16title">自定义组件的 v-model（2.2.0 新增）</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader17" id="articleHeader17title">非父子组件的通信</a></li></ul></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader18" id="articleHeader18title">六.使用插槽slot分发内容</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader19" id="articleHeader19title">单个插槽</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader20" id="articleHeader20title">具名插槽</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader21" id="articleHeader21title">作用域插槽(2.1.0 新增)</a></li></ul></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader22" id="articleHeader22title">七.动态组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader23" id="articleHeader23title">keep-alive</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader24" id="articleHeader24title">八.杂项</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader25" id="articleHeader25title">编写可复用组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader26" id="articleHeader26title">子组件引用</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader27" id="articleHeader27title">异步组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader28" id="articleHeader28title">高级异步组件(2.3.0 新增)</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader29" id="articleHeader29title">组件命名约定</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader30" id="articleHeader30title">递归组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader31" id="articleHeader31title">组件间的循环引用</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader32" id="articleHeader32title">X-Template</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader33" id="articleHeader33title">对低开销的静态组件使用 v-once</a></li></ul></li></ul></div></div></div></div>
+			<div id="cnblogs_post_body" class="blogpost-body"><h2 id="articleHeader0">一.什么是组件？</h2>
+<p>组件 (Component) 是 Vue.js 最强大的功能之一。组件可以扩展 HTML 元素，封装可重用的代码。在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以表现为用<code> is </code>特性进行了扩展的原生 HTML 元素。</p>
+<blockquote>
+<p>所有的<code> Vue 组件</code>同时也都是 <code>Vue 的实例</code>，所以可接受相同的选项对象 (除了一些根级特有的选项) 并提供相同的生命周期钩子。</p>
+</blockquote>
+<h2 id="articleHeader1">二.注册组件</h2>
+<h3 id="articleHeader2">全局注册</h3>
+<p>html代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span>id</span><span>=<span class="hljs-string">"example"</span></span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">my-component</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">my-component</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>JS代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 注册</span></span>
+Vue.component(<span class="hljs-string">'my-component'</span><span>, {
+  template: </span><span class="hljs-string">'&lt;div&gt;A custom component!&lt;/div&gt;'</span><span>
+})
+</span><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  el: </span><span class="hljs-string">'#example'</span><span>,
+  data: {
+       
+  } 
+})</span></pre>
+</div>
+<p>渲染结果为：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"example"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>A custom component!<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>或者另外一种注册方式，通过 全局API：<code>Vue.extend()</code><br>代码如下：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 注册</span></span>
+<span><span class="hljs-keyword">var</span></span> MyComponent =<span> Vue.extend({
+  template: </span><span class="hljs-string">'&lt;div&gt;A custom component!&lt;/div&gt;'</span><span>
+});
+
+</span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 注册</span></span>
+Vue.component(<span class="hljs-string">'my-component'</span><span>, MyComponent);
+</span><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  el: </span><span class="hljs-string">'#example'</span><span>,
+  data: {
+       
+  }
+})</span></pre>
+</div>
+<h4 id="articleHeader3">Vue.extend()使用说明</h4>
+<p>下面说明下<code>Vue.extend( options )</code>的使用。<br>参数：<code>{Object} options</code><br>用法：使用基础 Vue 构造器，创建一个“子类”。参数是一个<code>包含组件选项的对象</code>。<br><code>data</code> 选项是特例，需要注意 - 在 <code>Vue.extend() </code>中它必须是<code>函数</code>。</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span>id</span><span>=<span class="hljs-string">"mount-point"</span></span><span>&gt;<span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs php"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 创建构造器</span></span>
+<span><span class="hljs-keyword">var</span></span> Profile =<span> Vue.extend({
+  template: </span><span class="hljs-string">'&lt;p&gt;{{firstName}} {{lastName}} aka {{alias}}&lt;/p&gt;'</span><span>,
+  data: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> <span class="hljs-params">()</span> </span>{
+    </span><span><span class="hljs-keyword">return</span></span><span> {
+      firstName: </span><span class="hljs-string">'Walter'</span><span>,
+      lastName: </span><span class="hljs-string">'White'</span><span>,
+      alias: </span><span class="hljs-string">'Heisenberg'</span><span>
+    }
+  }
+})
+</span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 创建 Profile 实例，并挂载到一个元素上。</span></span>
+<span><span class="hljs-keyword">new</span></span> Profile().$mount(<span class="hljs-string">'#mount-point'</span>)</pre>
+</div>
+<p>结果如下：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>Walter White aka Heisenberg<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>上面又用到了实例方法<code>vm.$mount()</code>，下面说明下它的使用方式。</p>
+<h4 id="articleHeader4">vm.$mount( [elementOrSelector] )使用说明</h4>
+<p>参数：</p>
+<ul>
+<li><code>{Element | string} [elementOrSelector]</code></li>
+<li><code>{boolean} [hydrating]</code></li>
+</ul>
+<p>返回值：<code>vm</code> - 实例自身<br>用法：<br>如果 <code>Vue</code> 实例在实例化时没有收到<code> el </code>选项，则它处于“<code>未挂载</code>”状态，没有关联的<code> DOM </code>元素。可以使用<code> vm.$mount() </code>手动地挂载一个未挂载的实例。</p>
+<p>如果没有提供 <code>elementOrSelector </code>参数，模板将被渲染为文档之外的的元素，并且你必须使用<code>原生 DOM API </code>把它插入文档中。</p>
+<p>这个方法返回实例自身，因而可以链式调用其它实例方法。</p>
+<div class="cnblogs_code">
+<pre class="hljs php"><span><span class="hljs-keyword">var</span></span> MyComponent =<span> Vue.extend({
+  template: </span><span class="hljs-string">'&lt;div&gt;Hello!&lt;/div&gt;'</span><span>
+})
+
+</span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 创建并挂载到 #app (会替换 #app)</span></span>
+<span><span class="hljs-keyword">new</span></span> MyComponent().$mount(<span class="hljs-string">'#app'</span><span>)
+
+</span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 同上</span></span>
+<span><span class="hljs-keyword">new</span></span> MyComponent({ el: <span class="hljs-string">'#app'</span><span> })
+
+</span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 或者，在文档之外渲染并且随后挂载</span></span>
+<span><span class="hljs-keyword">var</span></span> component = <span><span class="hljs-keyword">new</span></span><span> MyComponent().$mount()
+document.getElementById(</span><span class="hljs-string">'app'</span>).appendChild(component.$el)</pre>
+</div>
+<h3 id="articleHeader3">局部注册</h3>
+<p>你不必把每个组件都注册到全局。你可以通过某个 Vue 实例/组件的实例选项 components 注册仅在其作用域中可用的组件：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-keyword">var</span></span> Child =<span> {
+  template: </span><span class="hljs-string">'&lt;div&gt;A custom component!&lt;/div&gt;'</span><span>
+}
+
+</span><span><span class="hljs-keyword">new</span></span><span> Vue({
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> ...</span></span>
+<span>  components: {
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> &lt;my-component&gt; 将只在父组件模板中可用</span></span>
+    <span class="hljs-string">'my-component'</span><span>: Child
+  }
+})</span></pre>
+</div>
+<p>这种封装也适用于其它可注册的 Vue 功能，比如<code>指令</code>。</p>
+<h4 id="articleHeader6">DOM 模板解析注意事项</h4>
+<p>像 <code>&lt;ul&gt;、&lt;ol&gt;、&lt;table&gt;、&lt;select&gt;</code> 这样的元素里允许包含的元素有限制，而另一些像 <code>&lt;option&gt;</code> 这样的元素只能出现在某些特定元素的内部。</p>
+<p>例如：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>table</span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">my-row</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">...</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">my-row</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">table</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>自定义组件<code> &lt;my-row&gt;</code> 会被当作无效的内容，因此会导致错误的渲染结果。变通的方案是使用特殊的<code> is </code>特性：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">table</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">tr</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">is</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"my-row"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">tr</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">table</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p><strong>应当注意，如果使用来自以下来源之一的字符串模板，则没有这些限制：</strong></p>
+<ul>
+<li><code>&lt;script type="text/x-template"&gt;</code></li>
+<li><code>JavaScript</code> 内联模板字符串</li>
+<li><code>.vue</code> 组件</li>
+</ul>
+<p>因此，请尽可能使用字符串模板。</p>
+<h4 id="articleHeader7">data 必须是函数</h4>
+<p>如下代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs coffeescript">Vue.component(<span class="hljs-string">'my-component'</span><span>, {
+  template: </span><span class="hljs-string">'&lt;span&gt;{{ message }}&lt;/span&gt;'</span><span>,
+  data: {
+    message: </span><span class="hljs-string">'hello'</span><span>
+  }
+})</span></pre>
+</div>
+<p>那么 Vue 会停止运行，并在控制台发出警告，告诉你在组件实例中 <code>data</code> 必须是一个函数。<br>我们来理解下，看下面代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"example-2"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">simple-counter</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">simple-counter</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">simple-counter</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">simple-counter</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">simple-counter</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">simple-counter</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span><span class="hljs-keyword">var</span></span> data = { <span class="hljs-attr">counter</span>: <span class="hljs-number">0</span><span> }
+
+Vue.component(</span><span class="hljs-string">'simple-counter'</span><span>, {
+  <span class="hljs-attr">template</span>: </span><span class="hljs-string">'&lt;button v-on:click="counter += 1"&gt;{{ counter }}&lt;/button&gt;'</span><span>,
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 技术上 data 的确是一个函数了，因此 Vue 不会警告，</span></span>
+  <span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 但是我们却给每个组件实例返回了同一个对象的引用</span></span>
+  data: <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+    </span><span><span class="hljs-keyword">return</span></span><span> data
+  }
+})
+
+</span><span><span class="hljs-keyword">new</span></span><span> Vue({
+  <span class="hljs-attr">el</span>: </span><span class="hljs-string">'#example-2'</span><span>
+})</span></pre>
+</div>
+<p>由于这三个组件实例<code>共享</code>了同一个<code> data </code>对象，因此递增一个 <code>counter </code>会影响所有组件！这就错了。我们可以通过为每个组件返回全新的数据对象来修复这个问题：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">data: <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+  </span><span><span class="hljs-keyword">return</span></span><span> {
+    <span class="hljs-attr">counter</span>: </span><span class="hljs-number">0</span><span>
+  }
+}</span></pre>
+</div>
+<p>现在每个 counter 都有它自己内部的状态了,不会相互影响。</p>
+<h2 id="articleHeader4">三.Prop</h2>
+<p>最常见的应用就是：组件 A 在它的模板中使用了组件 B。它们之间必然需要相互通信：父组件可能要给子组件下发数据，子组件则可能要将它内部发生的事情告知父组件。</p>
+<p>在 Vue 中，父子组件的关系可以总结为 <code>prop</code> 向下传递，<code>事件</code>向上传递。父组件通过 <code>prop</code> 给子组件下发数据，子组件通过<code>事件</code>给父组件发送消息。</p>
+<h3 id="articleHeader5">使用 Prop 传递数据</h3>
+<p>实例1：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'child'</span><span>, {
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 声明 props</span></span>
+  props: [<span class="hljs-string">'message'</span><span>],
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 就像 data 一样，prop 也可以在模板中使用</span></span>
+  <span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 同样也可以在 vm 实例中通过 this.message 来使用</span></span>
+  template: <span class="hljs-string">'&lt;span&gt;{{ message }}&lt;/span&gt;'</span><span>
+})
+
+</span>&lt;child message=<span class="hljs-string">"hello!"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span></span></pre>
+</div>
+<p>结果：<code>hello!</code></p>
+<p>实例2：<br>HTML 特性是不区分大小写的。所以，当使用的不是字符串模板时，camelCase (驼峰式命名) 的 prop 需要转换为相对应的 kebab-case (短横线分隔式命名)：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml">Vue.component('child'<span>, {
+  </span><span>//</span><span> 在 JavaScript 中使用 camelCase</span>
+  props: ['myMessage'<span>],
+  template: </span>'<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{{ myMessage }}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>'<span>
+})
+
+</span><span class="hljs-comment">&lt;!-- 在 HTML 中使用 kebab-</span><span><span class="hljs-comment">case</span></span><span class="hljs-comment"> --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">my-message</span>=<span class="hljs-string">"hello!"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span></pre>
+</div>
+<p>如果你使用字符串模板，则没有这些限制。</p>
+<h3 id="articleHeader6">动态 Prop</h3>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">input</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"parentMsg"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">br</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">child</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-bind:my-message</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"parentMsg"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">child</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>你也可以使用 v-bind 的缩写语法：</p>
+<div class="cnblogs_code">
+<pre class="hljs ruby"><span>&lt;</span><span>child </span><span><span class="hljs-symbol">:my-message</span></span><span><span class="hljs-symbol">=<span class="hljs-string">"parentMsg"</span></span></span><span><span class="hljs-symbol">&gt;&lt;/</span></span><span><span class="hljs-symbol">child</span></span><span><span class="hljs-symbol">&gt;</span></span></pre>
+</div>
+<p><strong><code>（重要）</code></strong>如果你想把一个<code>对象</code>的所有<code>属性</code>作为 prop 进行传递，可以使用不带任何参数的 <code>v-bind </code>(即用 v-bind 而不是 v-bind:prop-name)。例如，已知一个<code> todo</code> 对象：</p>
+<div class="cnblogs_code">
+<pre class="hljs css"><span><span class="hljs-selector-tag">todo</span>: {
+  <span class="hljs-attribute">text</span>: </span><span class="hljs-string">'Learn Vue'</span><span>,
+  isComplete: </span><span>false</span><span>
+}</span></pre>
+</div>
+<p>然后：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">todo-item</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-bind</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"todo"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">todo-item</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>将等价于：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">todo-item</span>
+  </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-bind:text</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"todo.text"</span></span></span><span><span class="hljs-tag">
+  <span class="hljs-attr">v-bind:is-complete</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"todo.isComplete"</span></span></span><span class="hljs-tag">
+</span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">todo-item</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h3 id="articleHeader7">字面量语法 vs 动态语法</h3>
+<p>初学者常犯的一个错误是使用字面量语法传递数值：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 传递了一个字符串 "1" </span></span><span><span class="hljs-comment">--&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">comp</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">some-prop</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"1"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">comp</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>因为它是一个字面量 <code>prop</code>，它的值是字符串 "1" 而不是一个数值。如果想传递一个真正的 JavaScript 数值，则需要使用 <code>v-bind</code>，从而让它的值被当作 <code>JavaScript 表达式</code>计算：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 传递真正的数值 </span></span><span><span class="hljs-comment">--&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">comp</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-bind:some-prop</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"1"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">comp</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h3 id="articleHeader8">单向数据流</h3>
+<p>Prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是反过来不会。这是为了防止子组件无意间修改了父组件的状态，来避免应用的数据流变得难以理解。</p>
+<p>另外，每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你<code>不应该</code>在子组件内部改变<code> prop</code>。如果你这么做了，Vue 会在控制台给出警告。</p>
+<p>在两种情况下，我们很容易忍不住想去修改 prop 中数据：</p>
+<ul>
+<li>Prop 作为初始值传入后，子组件想把它当作局部数据来用；</li>
+<li>Prop 作为原始数据传入，由子组件处理成其它数据输出。</li>
+</ul>
+<p>对这两种情况，正确的应对方式是：<br>1.定义一个局部变量，并用 prop 的值初始化它：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">props: [<span class="hljs-string">'initialCounter'</span><span>],
+<span class="hljs-attr">data</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+  </span><span><span class="hljs-keyword">return</span></span> { <span class="hljs-attr">counter</span>: <span><span class="hljs-keyword">this</span></span><span>.initialCounter }
+}</span></pre>
+</div>
+<p>2.定义一个计算属性，处理 prop 的值并返回：</p>
+<div class="cnblogs_code">
+<pre class="hljs css"><span class="hljs-selector-tag">props</span>: <span class="hljs-selector-attr">['size'</span><span><span class="hljs-selector-attr">]</span>,
+<span class="hljs-selector-tag">computed</span>: {
+  <span class="hljs-attribute">normalizedSize</span>: </span><span>function</span><span> () {
+    </span><span>return</span> <span>this</span><span>.size.<span class="hljs-built_in">trim</span>().<span class="hljs-built_in">toLowerCase</span>()
+  }
+}</span></pre>
+</div>
+<blockquote>
+<p>注意在 JavaScript 中<code>对象</code>和<code>数组</code>是引用类型，指向<code>同一个内存空间</code>，如果 prop 是一个对象或数组，在子组件内部改变它<code>会影响</code>父组件的状态。</p>
+</blockquote>
+<h3 id="articleHeader9">Prop 验证</h3>
+<p>我们可以为组件的 prop 指定验证规则。如果传入的数据不符合要求，Vue 会发出警告。<br>要指定验证规则，需要用<code>对象的形式</code>来定义 prop，而<code>不能用字符串数组</code>：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'example'</span><span>, {
+  <span class="hljs-attr">props</span>: {
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 基础类型检测 (`null` 指允许任何类型)</span></span>
+<span>    propA: <span class="hljs-built_in">Number</span>,
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 可能是多种类型</span></span>
+<span>    propB: [<span class="hljs-built_in">String</span>, <span class="hljs-built_in">Number</span>],
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 必传且是字符串</span></span>
+<span>    propC: {
+      <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,
+      <span class="hljs-attr">required</span>: </span><span><span class="hljs-literal">true</span></span><span>
+    },
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 数值且有默认值</span></span>
+<span>    propD: {
+      <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,
+      </span><span><span class="hljs-attr">default</span></span>: <span class="hljs-number">100</span><span>
+    },
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 数组/对象的默认值应当由一个工厂函数返回</span></span>
+<span>    propE: {
+      <span class="hljs-attr">type</span>: <span class="hljs-built_in">Object</span>,
+      </span><span><span class="hljs-attr">default</span></span>: <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+        </span><span><span class="hljs-keyword">return</span></span> { <span class="hljs-attr">message</span>: <span class="hljs-string">'hello'</span><span> }
+      }
+    },
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 自定义验证函数</span></span>
+<span>    propF: {
+      <span class="hljs-attr">validator</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params">value</span>) </span>{
+        </span><span><span class="hljs-keyword">return</span></span> value &gt; <span class="hljs-number">10</span><span>
+      }
+    }
+  }
+})</span></pre>
+</div>
+<p><code>type</code> 可以是下面原生构造器：String ，Number，Boolean，Function，Object，Array，Symbol。</p>
+<p><code>type</code> 也可以是一个自定义构造器函数，使用 <code>instanceof</code> 检测。</p>
+<p>当<code> prop </code>验证失败，Vue 会抛出警告 (如果使用的是开发版本)。注意 prop 会在组件实例创建之前进行校验，所以在<code> default</code> 或 <code>validator</code> 函数里，诸如 <code>data</code>、<code>computed</code> 或 <code>methods</code> 等实例属性还无法使用。</p>
+<p>其它实例：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'modal'</span><span>, {
+  <span class="hljs-attr">template</span>: </span><span class="hljs-string">'#modal-template'</span><span>,
+  <span class="hljs-attr">props</span>: {
+    <span class="hljs-attr">show</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-built_in">Boolean</span>,
+      <span class="hljs-attr">required</span>: </span><span><span class="hljs-literal">true</span></span><span>,
+      <span class="hljs-attr">twoWay</span>: </span><span><span class="hljs-literal">true</span></span><span>    
+    }
+  }
+});</span></pre>
+</div>
+<p><code>twoWay Prop</code> 的参数 <code>移除</code>。Props 现在只能单向传递。为了对父组件产生反向影响，子组件需要显式地传递一个事件而不是依赖于隐式地双向绑定。所以上面的的最后一个实例只是贴出来代码而已，最新版本已经移除了。</p>
+<h2 id="articleHeader10">四.非Prop特性</h2>
+<p>所谓非 prop 特性，就是指它可以直接传入组件，而不需要定义相应的 prop。</p>
+<p>尽管为组件定义明确的 prop 是推荐的传参方式，组件的作者却并不总能预见到组件被使用的场景。所以，<code>组件可以接收任意传入的特性</code>，这些特性都会被添加到组件的<code>根元素上</code>。</p>
+<p>例如，假设我们使用了第三方组件 bs-date-input，它包含一个 Bootstrap 插件，该插件需要在 input 上添加 data-3d-date-picker 这个特性。这时可以把特性直接添加到组件上 (不需要事先定义 prop)：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">bs-date-input</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">data-3d-date-picker</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"true"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">bs-date-input</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>添加属性 <code>data-3d-date-picker="true"</code> 之后，它会被自动添加到<code> bs-date-input</code> 的根元素上。</p>
+<p>假设这是 bs-date-input 的模板：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span>&lt;</span><span>input </span><span>type</span><span>=<span class="hljs-string">"date"</span></span><span> <span class="hljs-keyword">class</span></span><span>=<span class="hljs-string">"form-control"</span></span><span>&gt;</span></pre>
+</div>
+<p>为了给该日期选择器插件增加一个特殊的主题，我们可能需要增加一个特殊的 class，比如：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>bs-date-input
+  </span><span>data<span class="hljs-number">-3</span>d-date-picker</span><span>=<span class="hljs-string">"true"</span></span><span>
+  <span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span>=<span class="hljs-string">"date-picker-theme-dark"</span></span>
+<span>&gt;<span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">bs-date-input</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>最终在根元素上生成的class值为：form-control date-picker-theme-dark。</p>
+<h2 id="articleHeader11">五.自定义事件</h2>
+<p>我们知道，父组件使用 prop 传递数据给子组件。但子组件怎么跟父组件通信呢？这个时候 Vue 的自定义事件系统就派得上用场了。</p>
+<h3 id="articleHeader12">使用 v-on 绑定自定义事件</h3>
+<p>每个 Vue 实例都实现了事件接口，即：</p>
+<ul>
+<li>使用 $on(eventName) 监听事件</li>
+<li>使用 $emit(eventName) 触发事件</li>
+</ul>
+<blockquote>
+<p>Vue 的事件系统与浏览器的 <code>EventTarget API</code> 有所不同。尽管它们的运行起来类似，但是 <code>$on </code>和 <code>$emit</code> 并不是<code>addEventListener</code> 和<code> dispatchEvent</code> 的别名。</p>
+</blockquote>
+<p>另外，父组件可以在使用子组件的地方直接用 <code>v-on</code> 来监听子组件触发的事件。</p>
+<p>不能用 $on 侦听子组件释放的事件，而必须在模板里直接用 v-on 绑定，参见下面的例子。</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"counter-event-example"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>{{ total }}<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">button-counter</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-on:increment</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"incrementTotal"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">button-counter</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">button-counter</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-on:increment</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"incrementTotal"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">button-counter</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'button-counter'</span><span>, {
+  <span class="hljs-attr">template</span>: </span><span class="hljs-string">'&lt;button v-on:click="incrementCounter"&gt;{{ counter }}&lt;/button&gt;'</span><span>,
+  <span class="hljs-attr">data</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+    </span><span><span class="hljs-keyword">return</span></span><span> {
+      <span class="hljs-attr">counter</span>: </span><span class="hljs-number">0</span><span>
+    }
+  },
+  <span class="hljs-attr">methods</span>: {
+    <span class="hljs-attr">incrementCounter</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+      </span><span><span class="hljs-keyword">this</span></span>.counter += <span class="hljs-number">1</span>
+      <span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'increment'</span><span>)
+    }
+  },
+})
+
+</span><span><span class="hljs-keyword">new</span></span><span> Vue({
+  <span class="hljs-attr">el</span>: </span><span class="hljs-string">'#counter-event-example'</span><span>,
+  <span class="hljs-attr">data</span>: {
+    <span class="hljs-attr">total</span>: </span><span class="hljs-number">0</span><span>
+  },
+  <span class="hljs-attr">methods</span>: {
+    <span class="hljs-attr">incrementTotal</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+      </span><span><span class="hljs-keyword">this</span></span>.total += <span class="hljs-number">1</span><span>
+    }
+  }
+})</span></pre>
+</div>
+<h3 id="articleHeader13">给组件绑定原生事件.native</h3>
+<p>有时候，你可能想在某个组件的根元素上监听一个原生事件。可以使用 v-on 的修饰符 <code>.native</code>。例如：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">my-component</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-on:click.native</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"doTheThing"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">my-component</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h3 id="articleHeader14">.sync 修饰符(2.3.0+)</h3>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>comp </span><span>:foo.sync</span><span>=<span class="hljs-string">"bar"</span></span><span>&gt;<span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">comp</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>会被扩展为：</p>
+<div class="cnblogs_code">
+<pre class="hljs ruby"><span>&lt;</span><span>comp </span><span><span class="hljs-symbol">:foo</span></span><span><span class="hljs-symbol">=<span class="hljs-string">"bar"</span></span></span><span> @update<span class="hljs-symbol">:foo</span></span><span><span class="hljs-symbol">=<span class="hljs-string">"val =&gt; bar = val"</span></span></span><span><span class="hljs-symbol">&gt;&lt;/</span></span><span><span class="hljs-symbol">comp</span></span><span><span class="hljs-symbol">&gt;</span></span></pre>
+</div>
+<p>当子组件需要更新 foo 的值时，它需要显式地触发一个更新事件：</p>
+<div class="cnblogs_code">
+<pre class="hljs coffeescript"><span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'update:foo'</span>, newValue)</pre>
+</div>
+<h3 id="articleHeader15">使用自定义事件的表单输入组件</h3>
+<p>自定义事件可以用来创建自定义的表单输入组件，使用 v-model 来进行数据双向绑定。要牢记：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">input</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"something"</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>这不过是以下示例的语法糖：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span>&lt;</span><span>input
+  </span><span>v-bind:<span class="hljs-keyword">value</span></span><span>=<span class="hljs-string">"something"</span></span><span>
+  v-<span class="hljs-keyword">on</span>:input</span><span>=<span class="hljs-string">"something = $event.target.value"</span></span><span>&gt;</span></pre>
+</div>
+<p>所以在组件中使用时，它相当于下面的简写：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span>&lt;</span><span>custom-input
+  </span><span>v-bind:<span class="hljs-keyword">value</span></span><span>=<span class="hljs-string">"something"</span></span><span>
+  v-<span class="hljs-keyword">on</span>:input</span><span>=<span class="hljs-string">"something = arguments[0]"</span></span><span>&gt;</span>
+<span>&lt;/</span><span>custom-input</span><span>&gt;</span></pre>
+</div>
+<p>所以要让组件的 v-model 生效，它应该 (从 2.2.0 起是可配置的)：</p>
+<ul>
+<li>接受一个 <code>value prop</code></li>
+<li>在有新的值时触发 <code>input</code> 事件并将新值作为参数</li>
+</ul>
+<p>例子1：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span>id</span><span>=<span class="hljs-string">"app"</span></span><span>&gt;</span>
+      <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">custom-input</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">v-model</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"something"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">custom-input</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">br</span></span></span></span><span><span class="xml"><span class="hljs-tag">/&gt;</span></span></span><span><span class="xml">
+    {{something}}
+</span></span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 注册</span></span>
+Vue.component(<span class="hljs-string">'custom-input'</span><span>, {
+  <span class="hljs-attr">props</span>:[</span><span class="hljs-string">'something'</span><span>],
+  <span class="hljs-attr">template</span>: </span><span class="hljs-string">'&lt;input type="text"  v-bind:value="something" v-on:input="updateValue($event.target.value)"/&gt;'</span><span>,
+  <span class="hljs-attr">methods</span>:{
+      <span class="hljs-attr">updateValue</span>:</span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function">(<span class="hljs-params">value</span>)</span>{
+           </span><span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'input'</span><span>, value)
+      }
+  }
+})
+</span><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  <span class="hljs-attr">el</span>: </span><span class="hljs-string">'#app'</span><span>,
+  <span class="hljs-attr">data</span>: {
+       <span class="hljs-attr">something</span>:</span><span class="hljs-string">''</span><span>
+  }
+  
+})</span></pre>
+</div>
+<p>例子2：货币输入的自定义控件</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"price"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs cs">Vue.component(<span class="hljs-string">'currency-input'</span><span>, {
+  template: </span><span class="hljs-string">'</span><span><span class="hljs-string">\
+    &lt;span&gt;\
+      $\
+      &lt;input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+      &gt;\
+    &lt;/span&gt;\
+  </span></span><span class="hljs-string">'</span><span>,
+  props: [</span><span class="hljs-string">'value'</span><span>],
+  methods: {
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制</span></span>
+    updateValue: <span>function</span><span> (<span class="hljs-keyword">value</span>) {
+      </span><span><span class="hljs-keyword">var</span></span> formattedValue =<span> <span class="hljs-keyword">value</span>
+        </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 删除两侧的空格符</span></span>
+<span>        .trim()
+        </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 保留 2 位小数</span></span>
+<span>        .slice(
+          </span><span class="hljs-number">0</span><span>,
+          <span class="hljs-keyword">value</span>.indexOf(</span><span class="hljs-string">'.'</span>) === <span class="hljs-number">-1</span>
+            ?<span> <span class="hljs-keyword">value</span>.length
+            : <span class="hljs-keyword">value</span>.indexOf(</span><span class="hljs-string">'.'</span>) + <span class="hljs-number">3</span><span>
+        )
+      </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 如果值尚不合规，则手动覆盖为合规的值</span></span>
+      <span><span class="hljs-keyword">if</span></span> (formattedValue !==<span> <span class="hljs-keyword">value</span>) {
+        </span><span><span class="hljs-keyword">this</span></span>.$refs.input.<span class="hljs-keyword">value</span> =<span> formattedValue
+      }
+      </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 通过 input 事件带出数值</span></span>
+      <span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'input'</span><span>, Number(formattedValue))
+    }
+  }
+})</span></pre>
+</div>
+<p>实例3：更加完善的货币过滤器</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"app"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span> 
+    </span></span><span><span class="hljs-tag"><span class="hljs-attr">label</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"Price"</span></span></span><span><span class="hljs-tag"> 
+    <span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"price"</span></span></span><span class="hljs-tag">
+  </span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span> 
+    </span></span><span><span class="hljs-tag"><span class="hljs-attr">label</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"Shipping"</span></span></span><span><span class="hljs-tag"> 
+    <span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"shipping"</span></span></span><span class="hljs-tag">
+  </span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span> 
+    </span></span><span><span class="hljs-tag"><span class="hljs-attr">label</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"Handling"</span></span></span><span><span class="hljs-tag"> 
+    <span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"handling"</span></span></span><span class="hljs-tag">
+  </span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span> 
+    </span></span><span><span class="hljs-tag"><span class="hljs-attr">label</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"Discount"</span></span></span><span><span class="hljs-tag"> 
+    <span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"discount"</span></span></span><span class="hljs-tag">
+  </span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">currency-input</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>Total: ${{ total }}<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'currency-input'</span><span>, {
+  <span class="hljs-attr">template</span>: </span><span class="hljs-string">'</span><span><span class="hljs-string">\
+    &lt;div&gt;\
+      &lt;label v-if="label"&gt;{{ label }}&lt;/label&gt;\
+      $\
+      &lt;input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+        v-on:focus="selectAll"\
+        v-on:blur="formatValue"\
+      &gt;\
+    &lt;/div&gt;\
+  </span></span><span class="hljs-string">'</span><span>,
+  <span class="hljs-attr">props</span>: {
+    <span class="hljs-attr">value</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,
+      </span><span><span class="hljs-attr">default</span></span>: <span class="hljs-number">0</span><span>
+    },
+    <span class="hljs-attr">label</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,
+      </span><span><span class="hljs-attr">default</span></span>: <span class="hljs-string">''</span><span>
+    }
+  },
+  <span class="hljs-attr">mounted</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+    </span><span><span class="hljs-keyword">this</span></span><span>.formatValue()
+  },
+  <span class="hljs-attr">methods</span>: {
+    <span class="hljs-attr">updateValue</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params">value</span>) </span>{
+      </span><span><span class="hljs-keyword">var</span></span> result = currencyValidator.parse(value, <span><span class="hljs-keyword">this</span></span><span>.value)
+      </span><span><span class="hljs-keyword">if</span></span><span> (result.warning) {
+        </span><span><span class="hljs-keyword">this</span></span>.$refs.input.value =<span> result.value
+      }
+      </span><span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'input'</span><span>, result.value)
+    },
+    <span class="hljs-attr">formatValue</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+      </span><span><span class="hljs-keyword">this</span></span>.$refs.input.value = currencyValidator.format(<span><span class="hljs-keyword">this</span></span><span>.value)
+    },
+    <span class="hljs-attr">selectAll</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params">event</span>) </span>{
+      </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> Workaround for Safari bug</span></span>
+      <span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome</span></span>
+      setTimeout(<span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+          event.target.select()
+      }, </span><span class="hljs-number">0</span><span>)
+    }
+  }
+})
+
+</span><span><span class="hljs-keyword">new</span></span><span> Vue({
+  <span class="hljs-attr">el</span>: </span><span class="hljs-string">'#app'</span><span>,
+  <span class="hljs-attr">data</span>: {
+    <span class="hljs-attr">price</span>: </span><span class="hljs-number">0</span><span>,
+    <span class="hljs-attr">shipping</span>: </span><span class="hljs-number">0</span><span>,
+    <span class="hljs-attr">handling</span>: </span><span class="hljs-number">0</span><span>,
+    <span class="hljs-attr">discount</span>: </span><span class="hljs-number">0</span><span>
+  },
+  <span class="hljs-attr">computed</span>: {
+    <span class="hljs-attr">total</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+      </span><span><span class="hljs-keyword">return</span></span><span> ((
+        </span><span><span class="hljs-keyword">this</span></span>.price * <span class="hljs-number">100</span> + 
+        <span><span class="hljs-keyword">this</span></span>.shipping * <span class="hljs-number">100</span> + 
+        <span><span class="hljs-keyword">this</span></span>.handling * <span class="hljs-number">100</span> - 
+        <span><span class="hljs-keyword">this</span></span>.discount * <span class="hljs-number">100</span><span>
+      ) </span>/ <span class="hljs-number">100</span>).toFixed(<span class="hljs-number">2</span><span>)
+    }
+  }
+})</span></pre>
+</div>
+<h3 id="articleHeader16">自定义组件的 v-model（2.2.0 新增）</h3>
+<p>默认情况下，一个组件的 v-model 会使用 value prop 和 input 事件。但是诸如单选框、复选框之类的输入类型可能把 value 用作了别的目的。model 选项可以避免这样的冲突：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs">Vue.component(<span class="hljs-string">'my-checkbox'</span><span>, {
+  model: {
+    prop: </span><span class="hljs-string">'checked'</span><span>,
+    <span class="hljs-keyword">event</span>: </span><span class="hljs-string">'change'</span><span>
+  },
+  props: {
+    <span class="hljs-keyword">checked</span>: Boolean,
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 这样就允许拿 `value` 这个 prop 做其它事了</span></span>
+<span>    <span class="hljs-keyword">value</span>: String
+  },
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> ...</span></span>
+})</pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">my-checkbox</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-model</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"foo"</span></span></span><span><span class="hljs-tag"> <span class="hljs-attr">value</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"some value"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">my-checkbox</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>上述代码等价于：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span>&lt;</span><span>my-checkbox
+  </span><span>:<span class="hljs-keyword">checked</span></span><span>=<span class="hljs-string">"foo"</span></span><span>
+  @change</span><span>=<span class="hljs-string">"val =&gt; { foo = val }"</span></span><span>
+  <span class="hljs-keyword">value</span></span><span>=<span class="hljs-string">"some value"</span></span><span>&gt;</span>
+<span>&lt;/</span><span>my-checkbox</span><span>&gt;</span></pre>
+</div>
+<blockquote>
+<p>注意你仍然需要显式声明 <code>checked</code> 这个<code> prop</code>。</p>
+</blockquote>
+<p>完整的代码：<br>html：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span>id</span><span>=<span class="hljs-string">"app"</span></span><span>&gt;</span>
+      <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">my-checkbox</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">v-model</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"foo"</span></span></span></span><span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">value</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"some value"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">my-checkbox</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span><span class="xml">
+    {{foo}}
+</span></span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>JS代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'my-checkbox'</span><span>, {
+  <span class="hljs-attr">model</span>: {
+    <span class="hljs-attr">prop</span>: </span><span class="hljs-string">'checked'</span><span>,
+    <span class="hljs-attr">event</span>: </span><span class="hljs-string">'change'</span><span>
+  },
+  <span class="hljs-attr">props</span>: {
+    <span class="hljs-attr">checked</span>: <span class="hljs-built_in">Boolean</span>,
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 这样就允许拿 `value` 这个 prop 做其它事了</span></span>
+<span>    value: <span class="hljs-built_in">String</span>
+  },
+  <span class="hljs-attr">template</span>:</span><span class="hljs-string">'&lt;input type="checkbox" @change="changefun(ischecked)"/&gt;'</span><span>,
+  <span class="hljs-attr">data</span>:</span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function">(<span class="hljs-params"></span>)</span>{
+      </span><span><span class="hljs-keyword">return</span></span><span> {
+          <span class="hljs-attr">ischecked</span>:</span><span><span class="hljs-keyword">this</span></span><span>.checked
+      }
+  },
+  <span class="hljs-attr">methods</span>:{
+      changefun(state){
+          </span><span><span class="hljs-keyword">this</span></span>.ischecked = !<span>state;
+          </span><span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'change'</span>, <span><span class="hljs-keyword">this</span></span><span>.ischecked);
+      }
+  }
+})
+</span><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  <span class="hljs-attr">el</span>: </span><span class="hljs-string">'#app'</span><span>,
+  <span class="hljs-attr">data</span>: {
+       <span class="hljs-attr">foo</span>:</span><span><span class="hljs-literal">false</span></span><span>
+  }
+  
+})</span></pre>
+</div>
+<h3 id="articleHeader17">非父子组件的通信</h3>
+<p>有时候，非父子关系的两个组件之间也需要通信。在简单的场景下，可以使用一个空的 Vue 实例作为事件总线：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-keyword">var</span></span> bus = <span><span class="hljs-keyword">new</span></span> Vue()</pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs php"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 触发组件 A 中的事件</span></span>
+bus.$emit(<span class="hljs-string">'id-selected'</span>, <span class="hljs-number">1</span>)</pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs php"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 在组件 B 创建的钩子中监听事件</span></span>
+bus.$on(<span class="hljs-string">'id-selected'</span>, <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> <span class="hljs-params">(id)</span> </span>{
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> ...</span></span>
+})</pre>
+</div>
+<p>在复杂的情况下，我们应该考虑使用专门的状态管理模式<code>Vuex</code>。</p>
+<p>来看一个完整的例子：<br>html代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"app"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+     <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">comp-a</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-on:id-selected</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"getdate"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">comp-a</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+     <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">comp-b</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">comp-b</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>JS代码：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span><span class="hljs-keyword">var</span></span> bus = <span><span class="hljs-keyword">new</span></span><span> Vue();
+
+Vue.component(</span><span class="hljs-string">'comp-a'</span><span>, {
+  <span class="hljs-attr">template</span>:</span><span class="hljs-string">'&lt;button class="compa" @click="comfuna"&gt;组件A&lt;/button&gt;'</span><span>,
+  <span class="hljs-attr">data</span>:</span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function">(<span class="hljs-params"></span>)</span>{
+      </span><span><span class="hljs-keyword">return</span></span><span> {
+          
+      }
+  },
+  <span class="hljs-attr">methods</span>:{
+      comfuna(){
+          bus.$emit(</span><span class="hljs-string">'id-selected'</span>, <span class="hljs-number">1</span><span>);
+          </span><span><span class="hljs-keyword">this</span></span>.$emit(<span class="hljs-string">'id-selected'</span>, <span class="hljs-number">1</span><span>);
+      }
+  }
+})
+Vue.component(</span><span class="hljs-string">'comp-b'</span><span>, {
+  <span class="hljs-attr">template</span>:</span><span class="hljs-string">'&lt;div class="compb"&gt;组件B&lt;/div&gt;'</span><span>,
+  <span class="hljs-attr">data</span>:</span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function">(<span class="hljs-params"></span>)</span>{
+      </span><span><span class="hljs-keyword">return</span></span><span> {
+          
+      }
+  },
+  mounted(){
+      </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 在组件 B 创建的钩子中监听事件</span></span>
+    bus.$on(<span class="hljs-string">'id-selected'</span>, <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params">id</span>) </span>{
+         <span class="hljs-built_in">console</span>.log(</span><span class="hljs-string">'在B组件中得到的值：'</span>+<span>id);
+    })
+  }
+ 
+})
+</span><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  <span class="hljs-attr">el</span>: </span><span class="hljs-string">'#app'</span><span>,
+  <span class="hljs-attr">data</span>: {},
+  <span class="hljs-attr">methods</span>:{
+      getdate(value){
+          <span class="hljs-built_in">console</span>.log(</span><span class="hljs-string">'得到当前的值：'</span>+<span>value);
+      }
+  }
+  
+})</span></pre>
+</div>
+<h2 id="articleHeader18">六.使用插槽slot分发内容</h2>
+<p>在使用组件时，我们常常要像这样组合它们：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">app</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">app-header</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">app-header</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">app-footer</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">app-footer</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">app</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>注意两点：</p>
+<ul>
+<li><code>&lt;app&gt;</code> 组件不知道它会收到什么内容。这是由使用 <code>&lt;app&gt;</code> 的父组件决定的。</li>
+<li><code>&lt;app&gt;</code> 组件很可能有它自己的模板。</li>
+</ul>
+<p>为了让组件可以组合，我们需要一种方式来混合父组件的内容与子组件自己的模板。使用特殊的 <code>&lt;slot&gt;</code> 元素作为原始内容的插槽。</p>
+<p>一个常见错误是试图在父组件模板内将一个指令绑定到子组件的属性/方法：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 无效 </span></span><span><span class="hljs-comment">--&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">child-component</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">v-show</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"someChildProperty"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">child-component</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>正确做法：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'child-component'</span><span>, {
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 有效，因为是在正确的作用域内</span></span>
+  template: <span class="hljs-string">'&lt;div v-show="someChildProperty"&gt;Child&lt;/div&gt;'</span><span>,
+  <span class="hljs-attr">data</span>: </span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+    </span><span><span class="hljs-keyword">return</span></span><span> {
+      <span class="hljs-attr">someChildProperty</span>: </span><span><span class="hljs-literal">true</span></span><span>
+    }
+  }
+})</span></pre>
+</div>
+<h3 id="articleHeader19">单个插槽</h3>
+<p>假定 my-component 组件有如下模板：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">h2</span></span></span><span><span class="hljs-tag">&gt;</span></span>我是子组件的标题<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">h2</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span></span><span>
+    只有在没有要分发的内容时才会显示。
+  </span><span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>父组件模板：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>我是父组件的标题<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">my-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>这是一些初始内容<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>这是更多的初始内容<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">my-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>渲染结果：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>我是父组件的标题<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">h2</span></span></span><span><span class="hljs-tag">&gt;</span></span>我是子组件的标题<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">h2</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>这是一些初始内容<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>这是更多的初始内容<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h3 id="articleHeader20">具名插槽</h3>
+<p><code>&lt;slot&gt;</code> 元素可以用一个特殊的特性 <code>name</code> 来进一步配置如何分发内容。多个插槽可以有不同的名字。具名插槽将匹配内容片段中有对应 <code>slot</code> 特性的元素。</p>
+<p>仍然可以有一个<strong>匿名插槽</strong>，它是<strong>默认插槽</strong>，作为找不到匹配的内容片段的备用插槽。如果没有默认插槽，这些找不到匹配的内容片段将被抛弃。</p>
+<p>例如，假定我们有一个 app-layout 组件，它的模板为：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">class</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"container"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">header</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"header"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">header</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">main</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">main</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">footer</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"footer"</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">footer</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>父组件模板：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">app-layout</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">slot</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"header"</span></span></span><span><span class="hljs-tag">&gt;</span></span>这里可能是一个页面标题<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>主要内容的一个段落。<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>另一个主要段落。<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">slot</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"footer"</span></span></span><span><span class="hljs-tag">&gt;</span></span>这里有一些联系信息<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">app-layout</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>渲染结果为：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">class</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"container"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">header</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>这里可能是一个页面标题<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">h1</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">header</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">main</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>主要内容的一个段落。<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>另一个主要段落。<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">main</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">footer</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>这里有一些联系信息<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">footer</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">div</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h3 id="articleHeader21">作用域插槽(2.1.0 新增)</h3>
+<p>作用域插槽是一种特殊类型的插槽，用作一个 (能被传递数据的) 可重用模板，来代替已经渲染好的元素。</p>
+<p>在子组件中，只需将数据传递到插槽，就像你将 prop 传递给组件一样：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span>=<span class="hljs-string">"child"</span></span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">slot</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">text</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"hello from child"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">slot</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span>
+<span>&lt;<span class="hljs-regexp">/</span></span><span><span class="hljs-regexp">div</span></span><span><span class="hljs-regexp">&gt;</span></span></pre>
+</div>
+<p>在父级中，具有特殊特性 <code>slot-scope </code>的<code> &lt;template&gt;</code> 元素必须存在，表示它是作用域插槽的模板。<code>slot-scope </code>的值将被用作一个临时变量名，此变量接收从子组件传递过来的 <code>prop</code> 对象：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span>=<span class="hljs-string">"parent"</span></span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">child</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">template</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">slot-scope</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"props"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+      </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">hello from parent</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+      </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">{{ props.text }}</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">template</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+  </span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">child</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span>
+<span>&lt;<span class="hljs-regexp">/</span></span><span><span class="hljs-regexp">div</span></span><span><span class="hljs-regexp">&gt;</span></span></pre>
+</div>
+<p>如果我们渲染上述模板，得到的输出会是：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span>=<span class="hljs-string">"parent"</span></span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">class</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"child"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">hello from parent</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">hello from child</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+  </span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span>
+<span>&lt;<span class="hljs-regexp">/</span></span><span><span class="hljs-regexp">div</span></span><span><span class="hljs-regexp">&gt;</span></span></pre>
+</div>
+<blockquote>
+<p>在 <code>2.5.0+</code>，<code>slot-scope</code> 能被用在任意元素或组件中而<code>不再局限于 &lt;template&gt;</code></p>
+</blockquote>
+<p>作用域插槽更典型的用例是在列表组件中，允许使用者自定义如何渲染列表的每一项：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">my-awesome-list</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">:items</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"items"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 作用域插槽也可以是具名的 </span></span><span><span class="hljs-comment">--&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">li</span>
+    </span></span><span><span class="hljs-tag"><span class="hljs-attr">slot</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"item"</span></span></span><span><span class="hljs-tag">
+    <span class="hljs-attr">slot-scope</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"props"</span></span></span><span><span class="hljs-tag">
+    <span class="hljs-attr">class</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"my-fancy-item"</span></span></span><span><span class="hljs-tag">&gt;</span></span><span>
+    {{ props.text }}
+  </span><span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">li</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">my-awesome-list</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>列表组件的模板：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">ul</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"item"</span></span></span><span><span class="hljs-tag">
+    <span class="hljs-attr">v-for</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"item in items"</span></span></span><span><span class="hljs-tag">
+    <span class="hljs-attr">:text</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"item.text"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 这里写入备用内容 </span></span><span><span class="hljs-comment">--&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">slot</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">ul</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p><strong>解构</strong></p>
+<p><code>slot-scope </code>的值实际上是一个可以出现在函数签名参数位置的合法的 JavaScript 表达式。这意味着在受支持的环境 (单文件组件或现代浏览器) 中，您还可以在表达式中使用 ES2015 解构：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">child</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">span</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">slot-scope</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"{ text }"</span></span></span><span><span class="hljs-tag">&gt;</span></span>{{ text }}<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">span</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">child</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h2 id="articleHeader22">七.动态组件</h2>
+<p>通过使用保留的<code> &lt;component&gt; </code>元素，并对其<code> is </code>特性进行动态绑定，你可以在同一个挂载点动态切换多个组件：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  el: </span><span class="hljs-string">'#example'</span><span>,
+  data: {
+    currentView: </span><span class="hljs-string">'home'</span><span>
+  },
+  components: {
+    home: { </span><span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> },
+    posts: { </span><span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> },
+    archive: { </span><span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> }
+  }
+})</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>component </span><span>v-bind:is</span><span>=<span class="hljs-string">"currentView"</span></span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-comment">&lt;!--</span></span></span><span><span class="xml"><span class="hljs-comment"> 组件在 vm.currentview 变化时改变！ </span></span></span><span><span class="xml"><span class="hljs-comment">--&gt;</span></span></span><span class="xml">
+</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">component</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>也可以直接绑定到组件对象上：</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-keyword">var</span></span> Home =<span> {
+  template: </span><span class="hljs-string">'&lt;p&gt;Welcome home!&lt;/p&gt;'</span><span>
+}
+
+</span><span><span class="hljs-keyword">var</span></span> vm = <span><span class="hljs-keyword">new</span></span><span> Vue({
+  el: </span><span class="hljs-string">'#example'</span><span>,
+  data: {
+    currentView: Home
+  }
+})</span></pre>
+</div>
+<h2 id="articleHeader23">keep-alive</h2>
+<p>如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个 <code>keep-alive</code> 指令参数：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">keep-alive</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">component</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">:is</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"currentView"</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+    <span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 非活动组件将被缓存！ </span></span><span><span class="hljs-comment">--&gt;</span></span>
+  <span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">keep-alive</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h2 id="articleHeader24">八.杂项</h2>
+<h3 id="articleHeader25">编写可复用组件</h3>
+<p>Vue 组件的 API 来自三部分——prop、事件和插槽：</p>
+<ul>
+<li><code>Prop</code> 允许外部环境传递数据给组件；</li>
+<li><code>事件</code>允许从组件内触发外部环境的副作用；</li>
+<li><code>插槽</code>允许外部环境将额外的内容组合在组件中。</li>
+</ul>
+<p>使用 v-bind 和 v-on 的简写语法，模板的意图会更清楚且简洁：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">my-component</span>
+  </span></span><span><span class="hljs-tag"><span class="hljs-attr">:foo</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"baz"</span></span></span><span><span class="hljs-tag">
+  <span class="hljs-attr">:bar</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"qux"</span></span></span><span><span class="hljs-tag">
+  @<span class="hljs-attr">event-a</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"doThis"</span></span></span><span><span class="hljs-tag">
+  @<span class="hljs-attr">event-b</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"doThat"</span></span></span><span class="hljs-tag">
+</span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">img</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">slot</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"icon"</span></span></span><span><span class="hljs-tag"> <span class="hljs-attr">src</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"..."</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+  <span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">slot</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"main-text"</span></span></span><span><span class="hljs-tag">&gt;</span></span>Hello!<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">my-component</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<h3 id="articleHeader26">子组件引用</h3>
+<p>尽管有 prop 和事件，但是有时仍然需要在 JavaScript 中直接访问子组件。为此可以使用 <code>ref </code>为子组件指定一个引用 ID。例如：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>div </span><span>id</span><span>=<span class="hljs-string">"parent"</span></span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">user-profile</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">ref</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"profile"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">user-profile</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">div</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs php"><span><span class="hljs-keyword">var</span></span> <span class="hljs-keyword">parent</span> = <span><span class="hljs-keyword">new</span></span> Vue({ el: <span class="hljs-string">'#parent'</span><span> })
+</span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 访问子组件实例</span></span>
+<span><span class="hljs-keyword">var</span></span> child = <span class="hljs-keyword">parent</span>.$refs.profile</pre>
+</div>
+<p>当 <code>ref </code>和<code> v-for</code> 一起使用时，获取到的引用会是一个数组，包含和循环数据源对应的子组件。</p>
+<blockquote>
+<p><code>$refs </code>只在组件渲染完成后才填充，并且它是非响应式的。它仅仅是一个直接操作子组件的应急方案——应当避免在模板或计算属性中使用 <code>$refs</code>。</p>
+</blockquote>
+<h3 id="articleHeader27">异步组件</h3>
+<p>在大型应用中，我们可能需要将应用拆分为多个小模块，按需从服务器下载。为了进一步简化，Vue.js 允许将组件定义为一个工厂函数，异步地解析组件的定义。Vue.js 只在组件需要渲染时触发工厂函数，并且把结果缓存起来，用于后面的再次渲染。例如：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'async-example'</span>, <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params">resolve, reject</span>) </span>{
+  setTimeout(</span><span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+    </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 将组件定义传入 resolve 回调函数</span></span>
+<span>    resolve({
+      <span class="hljs-attr">template</span>: </span><span class="hljs-string">'&lt;div&gt;I am async!&lt;/div&gt;'</span><span>
+    })
+  }, </span><span class="hljs-number">1000</span><span>)
+})</span></pre>
+</div>
+<p>工厂函数接收一个 <code>resolve</code> 回调，在收到从服务器下载的组件定义时调用。也可以调用 <code>reject(reason) </code>指示加载失败。这里使用 setTimeout 只是为了演示，实际上如何获取组件完全由你决定。</p>
+<p>推荐配合 webpack 的代码分割功能 来使用：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">Vue.component(<span class="hljs-string">'async-webpack-example'</span>, <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params">resolve</span>) </span>{
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 这个特殊的 require 语法告诉 webpack</span></span>
+  <span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 自动将编译后的代码分割成不同的块，</span></span>
+  <span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 这些块将通过 Ajax 请求自动下载。</span></span>
+  <span class="hljs-built_in">require</span>([<span class="hljs-string">'./my-async-component'</span><span>], resolve)
+})</span></pre>
+</div>
+<p>你可以在工厂函数中返回一个 Promise，所以当使用 webpack 2 + ES2015 的语法时可以这样：</p>
+<div class="cnblogs_code">
+<pre class="hljs coffeescript"><span>Vue.component(
+  </span><span class="hljs-string">'async-webpack-example'</span><span>,
+  </span><span><span class="hljs-regexp">//</span></span><span> 该 `<span class="javascript"><span class="hljs-keyword">import</span></span>` 函数返回一个 `<span class="javascript"><span class="hljs-built_in">Promise</span></span>` 对象。</span>
+  () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'./my-async-component'</span><span>)
+)</span></pre>
+</div>
+<p>当使用局部注册时，也可以直接提供一个返回 Promise 的函数：</p>
+<div class="cnblogs_code">
+<pre class="hljs coffeescript"><span><span class="hljs-keyword">new</span></span><span> Vue({
+  </span><span><span class="hljs-regexp">//</span></span><span> ...</span>
+<span>  components: {
+    </span><span class="hljs-string">'my-component'</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./my-async-component'</span><span>)
+  }
+})</span></pre>
+</div>
+<h3 id="articleHeader28">高级异步组件(2.3.0 新增)</h3>
+<p>自 2.3.0 起，异步组件的工厂函数也可以返回一个如下的对象：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span class="hljs-keyword">const</span> AsyncComp = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span><span> ({
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 需要加载的组件。应当是一个 Promise</span></span>
+  component: <span class="hljs-keyword">import</span>(<span class="hljs-string">'./MyComp.vue'</span><span>),
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 加载中应当渲染的组件</span></span>
+<span>  loading: LoadingComp,
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 出错时渲染的组件</span></span>
+<span>  error: ErrorComp,
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 渲染加载中组件前的等待时间。默认：200ms。</span></span>
+  delay: <span class="hljs-number">200</span><span>,
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 最长等待时间。超出此时间则渲染错误组件。默认：Infinity</span></span>
+  timeout: <span class="hljs-number">3000</span><span>
+})</span></pre>
+</div>
+<blockquote>
+<p>注意，当一个异步组件被作为<code> vue-router </code>的路由组件使用时，这些高级选项都是无效的，因为在路由切换前就会提前加载所需要的异步组件。另外，如果你要在路由组件中使用上述写法，需要使用 <code>vue-router 2.4.0 以上</code>的版本。</p>
+</blockquote>
+<h3 id="articleHeader29">组件命名约定</h3>
+<p>当注册组件 (或者 prop) 时，可以使用 kebab-case (短横线分隔命名)、camelCase (驼峰式命名) 或 PascalCase (单词首字母大写命名)。</p>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 在组件定义中</span></span>
+<span>components: {
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 使用 kebab-case 注册</span></span>
+  <span class="hljs-string">'kebab-cased-component'</span>: { <span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> },
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 使用 camelCase 注册</span></span>
+  <span class="hljs-string">'camelCasedComponent'</span>: { <span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> },
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> 使用 PascalCase 注册</span></span>
+  <span class="hljs-string">'PascalCasedComponent'</span>: { <span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> }
+}</span></pre>
+</div>
+<p>在 HTML 模板中，请使用 kebab-case：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-comment">&lt;!--</span></span><span><span class="hljs-comment"> 在 HTML 模板中始终使用 kebab-case </span></span><span><span class="hljs-comment">--&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">kebab-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">kebab-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">camel-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">camel-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">pascal-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">pascal-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>当使用字符串模式时，可以不受 HTML 大小写不敏感的限制。这意味实际上在模板中，你可以使用下面的方式来引用你的组件：</p>
+<ul>
+<li>kebab-case</li>
+<li>camelCase 或 kebab-case (如果组件已经被定义为 camelCase)</li>
+<li>kebab-case、camelCase 或 PascalCase (如果组件已经被定义为 PascalCase)</li>
+</ul>
+<div class="cnblogs_code">
+<pre class="hljs cs"><span>components: {
+  </span><span class="hljs-string">'kebab-cased-component'</span>: { <span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> },
+  camelCasedComponent: { </span><span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> },
+  PascalCasedComponent: { </span><span><span class="hljs-comment">/*</span></span><span><span class="hljs-comment"> ... </span></span><span><span class="hljs-comment">*/</span></span><span> }
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">kebab-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">kebab-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">camel-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">camel-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">camelCasedComponent</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">camelCasedComponent</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">pascal-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">pascal-cased-component</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">pascalCasedComponent</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">pascalCasedComponent</span></span></span><span><span class="hljs-tag">&gt;</span></span>
+<span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">PascalCasedComponent</span></span></span><span><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">PascalCasedComponent</span></span></span><span><span class="hljs-tag">&gt;</span></span></pre>
+</div>
+<p>这意味着 PascalCase 是最通用的声明约定而 kebab-case 是最通用的使用约定。</p>
+<h3 id="articleHeader30">递归组件</h3>
+<p>组件在它的模板内可以递归地调用自己。不过，只有当它有<code> name</code> 选项时才可以这么做：</p>
+<div class="cnblogs_code">
+<pre class="hljs coffeescript">name: <span class="hljs-string">'unique-name-of-my-component'</span></pre>
+</div>
+<p>当你利用 <code>Vue.component</code> 全局注册了一个组件，全局的 <code>ID </code>会被自动设置为组件的 <code>name</code>。</p>
+<div class="cnblogs_code">
+<pre class="hljs cs">Vue.component(<span class="hljs-string">'unique-name-of-my-component'</span><span>, {
+  </span><span><span class="hljs-comment">//</span></span><span><span class="hljs-comment"> ...</span></span>
+})</pre>
+</div>
+<p>如果稍有不慎，递归组件可能导致死循环：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml">name: 'stack-overflow'<span>,
+template: </span>'<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">stack-overflow</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">stack-overflow</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>'</pre>
+</div>
+<p>上面组件会导致一个“max stack size exceeded”错误，所以要确保递归调用有终止条件 (比如递归调用时使用 <code>v-if </code>并最终解析为 <code>false</code>)。</p>
+<h3 id="articleHeader31">组件间的循环引用</h3>
+<p>假设你正在构建一个文件目录树，像在 Finder 或资源管理器中。你可能有一个 <code>tree-folder </code>组件：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>p</span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">{{ folder.name }}</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span>
+  <span>&lt;</span><span>tree-folder-contents </span><span>:children</span><span>=<span class="hljs-string">"folder.children"</span></span><span>/&gt;</span>
+<span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">p</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>以及一个 tree-folder-contents 组件：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript"><span>&lt;</span><span>ul</span><span>&gt;</span>
+  <span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">li</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">v-for</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"child in children"</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">tree-folder</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">v-if</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"child.children"</span></span></span></span><span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">:folder</span></span></span></span><span><span class="xml"><span class="hljs-tag">=<span class="hljs-string">"child"</span></span></span></span><span><span class="xml"><span class="hljs-tag">/&gt;</span></span></span><span class="xml">
+    </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span> </span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-attr">v-else</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">{{ child.name }}</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">span</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+  </span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">li</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span class="xml">
+</span><span><span class="xml"><span class="hljs-tag">&lt;/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">ul</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></pre>
+</div>
+<p>当你仔细看时，会发现在渲染树上这两个组件同时为对方的父节点和子节点——这是矛盾的！当使用 Vue.component 将这两个组件注册为全局组件的时候，框架会自动为你解决这个矛盾。</p>
+<p>然而，如果你使用诸如 webpack 或者 Browserify 之类的模块化管理工具来 require/import 组件的话，就会报错了：</p>
+<div class="cnblogs_code">
+<pre class="hljs ruby">Failed to mount <span class="hljs-symbol">component:</span> template <span class="hljs-keyword">or</span> render function <span class="hljs-keyword">not</span> <span class="hljs-keyword">defined</span>.</pre>
+</div>
+<p>在我们的例子中，可以选择让 tree-folder 组件中来做这件事。我们知道引起矛盾的子组件是 tree-folder-contents，所以我们要等到 beforeCreate 生命周期钩子中才去注册它：</p>
+<div class="cnblogs_code">
+<pre class="hljs javascript">beforeCreate: <span><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span><span class="hljs-function"> (<span class="hljs-params"></span>) </span>{
+  </span><span><span class="hljs-keyword">this</span></span>.$options.components.TreeFolderContents = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./tree-folder-contents.vue'</span><span>)
+}</span></pre>
+</div>
+<h3 id="articleHeader32">X-Template</h3>
+<p>另一种定义模板的方式是在 JavaScript 标签里使用 <code>text/x-template </code>类型，并且指定一个 id。例如：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml"><span><span class="hljs-tag">&lt;</span></span><span><span class="hljs-tag"><span class="hljs-name">script</span> </span></span><span><span class="hljs-tag"><span class="hljs-attr">type</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"text/x-template"</span></span></span><span><span class="hljs-tag"> <span class="hljs-attr">id</span></span></span><span><span class="hljs-tag">=<span class="hljs-string">"hello-world-template"</span></span></span><span><span class="hljs-tag">&gt;</span></span><span class="xml">
+  </span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">p</span></span></span></span><span><span class="xml"><span class="hljs-tag">&gt;</span></span></span><span><span class="xml">Hello hello hello</span></span><span><span class="xml"><span class="hljs-tag">&lt;</span></span></span><span><span class="xml"><span class="hljs-tag">/</span></span></span><span><span class="xml"><span class="hljs-tag"><span class="hljs-name">p</span>&gt;</span></span></span><span class="xml">
+</span><span><span class="hljs-tag">&lt;/</span></span><span><span class="hljs-tag"><span class="hljs-name">script</span></span></span><span><span class="hljs-tag">&gt;</span></span><span>
+
+Vue.component('hello-world', {
+  template: '#hello-world-template'
+})</span></pre>
+</div>
+<p>这在有很多大模板的演示应用或者特别小的应用中可能有用，其它场合应该避免使用，因为这将模板和组件的其它定义分离了。</p>
+<h3 id="articleHeader33">对低开销的静态组件使用 <code>v-once</code></h3>
+<p>尽管在 Vue 中渲染 HTML 很快，不过当组件中包含大量静态内容时，可以考虑使用 v-once 将渲染结果缓存起来，就像这样：</p>
+<div class="cnblogs_code">
+<pre class="hljs xml">Vue.component('terms-of-service'<span>, {
+  template: </span>'<span>\
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-once</span>&gt;</span>\
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Terms of Service<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>\
+      ...很多静态内容...\
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>\
+  </span>'<span>
+})</span></pre>
+</div>
+<p>&nbsp;</p><div class="reward-wrap-con"><div class="reward-btn-close">+</div><h2>(^_^)打赏作者喝个咖啡(^_^)</h2><div class="wechat"><img src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/m_weixin.gif" alt="微信支付"></div><div class="zhifubao"><img src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/m_zhifubao.gif" alt="支付宝支付"></div></div></div><div id="MySignature" style="display: block;"><div class="content"><div>作者：<a href="http://www.cnblogs.com/moqiutao/" target="_blank">风雨后见彩虹</a></div><div>github：<a href="https://github.com/hxlmqtily1314" target="_blank">https://github.com/hxlmqtily1314</a></div><div>如果觉得文章写得不错或对您有用，请随意打赏。点击文章右下角<span style="color:red;font-weight:bold;">“喜欢”</span>二字，您的支持是我最大的鼓励</div><div class="reward-btn-info">打赏支持</div></div><div class="article-btm"><div class="article-btm-line" id="showdirectory"><div class="ico ico-directory showdirectoryBtn"></div><div class="txt showdirectory">显示目录</div></div><div class="article-btm-line"><div class="ico ico-star" onclick="AddToWz(cb_entryId)"></div><div class="txt" onclick="AddToWz(cb_entryId)">我要收藏</div></div><div class="article-btm-line"><div class="ico ico-move-up" id="totop"></div><div class="txt" id="totop">返回顶部</div></div><div class="article-btm-line"><div class="ico ico-move-down" id="toBottom"></div><div class="txt" id="toBottom">跳到底部</div></div></div></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/moqiutao/category/923230.html" target="_blank">vuejs</a></div>
+<div id="EntryTag">标签: <a href="https://www.cnblogs.com/moqiutao/tag/vue/">vue</a>, <a href="https://www.cnblogs.com/moqiutao/tag/%E7%BB%84%E4%BB%B6/">组件</a>, <a href="https://www.cnblogs.com/moqiutao/tag/Component/">Component</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(8328931,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;bd35e4b2-fd6e-e311-8d02-90b11c0b17d6&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/moqiutao/" target="_blank"><img src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/20170812103717.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/moqiutao/">风雨后见彩虹</a><br>
+            <a href="http://home.cnblogs.com/u/moqiutao/followees">关注 - 20</a><br>
+            <a href="http://home.cnblogs.com/u/moqiutao/followers">粉丝 - 339</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;bd35e4b2-fd6e-e311-8d02-90b11c0b17d6&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(8328931,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(8328931,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/moqiutao/p/8328691.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/moqiutao/p/8328691.html" title="发布于2018-01-22 14:48">vue从入门到进阶：过滤器filters（五）</a><br><a href="https://www.cnblogs.com/moqiutao/p/8334780.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/moqiutao/p/8334780.html" title="发布于2018-01-23 11:21">vue从入门到进阶：自定义指令directive，插件的封装以及混合mixins（七）</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2018-01-22 17:33</span> <a href="https://www.cnblogs.com/moqiutao/">风雨后见彩虹</a> 阅读(<span id="post_view_count">6604</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=8328931" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/moqiutao/p/8328931.html#" onclick="AddToWz(8328931);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=172908,cb_entryId=8328931,cb_blogApp=currentBlogApp,cb_blogUserGuid='bd35e4b2-fd6e-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2018/1/22 17:33:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="https://www.linuxprobe.com/chapter-00.html" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-linuxprobe&#39;)">【免费】要想入门学习Linux系统技术，你应该先选择一本适合自己的书籍</a><br><a href="https://www.grapecity.com.cn/developer/spreadjs?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=SpreadJS&amp;utm_campaign=community" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-SpreadJS&#39;)">【前端】SpreadJS表格控件，可嵌入应用开发的在线Excel</a><br><a href="https://cloud.tencent.com/developer/edu/major-100008?fromSource=gwzcw.1297698.1297698.1297698" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-腾讯蓝鲸&#39;)">【推荐】企业SaaS应用开发实战，快速构建企业运营/运维系统</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cloud.tencent.com/act/campus?fromSource=gwzcw.1310908.1310908.1310908" target="_blank"><img width="300" height="250" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/24442-20180831095017780-325806835.jpg" alt="腾讯云0831" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/607095/" target="_blank">Apple Watch 4上手：毫无疑问，它是目前最好的智能手表</a><br> ·  <a href="https://news.cnblogs.com/n/607090/" target="_blank">危机接二连三 自如CEO称失眠解决不了问题</a><br> ·  <a href="https://news.cnblogs.com/n/607085/" target="_blank">天猫推iPhone XS保值回购服务：使用满一年后6折回购</a><br> ·  <a href="https://news.cnblogs.com/n/607087/" target="_blank">揭底亚马逊“包邮”背后的人力压榨：拖欠工资、车里撒尿</a><br> ·  <a href="https://news.cnblogs.com/n/607100/" target="_blank">马斯克的Boring Company获批在私宅车库内建隧道入口</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://clickc.admaster.com.cn/c/a113319,b2799157,c1705,i0,m101,8a1,8b3,h" target="_blank"><img width="468" height="60" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/24442-20180905095449933-746027525.jpg" alt="华为云HC0905" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C2&#39;);"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="https://kb.cnblogs.com/page/606682/" target="_blank">为什么说 Java 程序员必须掌握 Spring Boot ？</a><br> ·  <a href="https://kb.cnblogs.com/page/606645/" target="_blank">在学习中，有一个比掌握知识更重要的能力</a><br> ·  <a href="https://kb.cnblogs.com/page/603663/" target="_blank">如何招到一个靠谱的程序员</a><br> ·  <a href="https://kb.cnblogs.com/page/573614/" target="_blank">一个故事看懂“区块链”</a><br> ·  <a href="https://kb.cnblogs.com/page/603697/" target="_blank">被踢出去的用户</a><br></div>» <a href="https://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><style>
+  .newsItem{background:none;}
+    .ads01{
+    background: #fff;
+   padding: 8px 0 8px 1em;
+    font-size: 14px;
+    line-height: 2;
+    margin-top: 0!important;
+    border-bottom:1px solid #e1e1e1;
+}
+
+#adsTitle{
+   background: #390;
+    border-bottom: 1px solid #006600;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    height: 1.8em;
+    line-height: 1.8em;
+    padding: 5px;
+    text-indent: 0.5em;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  
+    background: none;
+    border-bottom: 0;
+    color: #000;
+    text-shadow: none;
+    font-weight: bold;
+
+}
+
+
+</style>
+<h3 id="adsTitle">公告</h3>
+<div class="ads01">
+<img src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/a.gif" style="margin:10px auto 10px;display:block;width:180px;border-radius:50%;">
+<p>您是第 <img border="0" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/counter.php" alt="AmazingCounters.com"> 位访客！
+本博客主要是记录自己的学习点滴~，文章来源于总结，转载，还有在工作中实际碰到的问题以记录，时间原因博文部分为用心打磨，部分仅为临时记录。还有一些不正确老博文随着后续的认识会不断的更正。
+</p><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/moqiutao/">风雨后见彩虹</a><br>园龄：<a href="https://home.cnblogs.com/u/moqiutao/" title="入园时间：2013-12-27">4年8个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/moqiutao/followers/">339</a><br>关注：<a href="https://home.cnblogs.com/u/moqiutao/followees/">20</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;bd35e4b2-fd6e-e311-8d02-90b11c0b17d6&#39;)">+加关注</a></div><script>getFollowStatus('bd35e4b2-fd6e-e311-8d02-90b11c0b17d6')</script></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/08/01&#39;);return false;">&lt;</a></td><td align="center">2018年9月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/10/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td class="CalWeekendDay" align="center">1</td></tr><tr><td class="CalWeekendDay" align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td class="CalWeekendDay" align="center">8</td></tr><tr><td class="CalWeekendDay" align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td class="CalTodayDay" align="center">13</td><td align="center">14</td><td class="CalWeekendDay" align="center">15</td></tr><tr><td class="CalWeekendDay" align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td class="CalWeekendDay" align="center">22</td></tr><tr><td class="CalWeekendDay" align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalWeekendDay" align="center">29</td></tr><tr><td class="CalWeekendDay" align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/moqiutao/category/739576.html">angular.js(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/moqiutao/category/803439.html">bootstrap(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/moqiutao/category/553637.html">css/html(37)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/moqiutao/category/572637.html">css3/html5(46)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/moqiutao/category/553636.html">javascript(89)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/moqiutao/category/553638.html">jquery(41)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/moqiutao/category/1028756.html">linux(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/moqiutao/category/1173495.html">node(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/moqiutao/category/1028757.html">PHPCMS(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/moqiutao/category/923230.html">vuejs(40)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="https://www.cnblogs.com/moqiutao/category/805064.html">webpack/git等(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="https://www.cnblogs.com/moqiutao/category/982881.html">红皮书系列(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="https://www.cnblogs.com/moqiutao/category/903414.html">我的笔记(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="https://www.cnblogs.com/moqiutao/category/576213.html">综合学习(25)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links996955" class="catList sidebar-block">
+<h3 class="catListTitle">javascript学习资源</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://es6.ruanyifeng.com/" rel="nofollow" target="_blank">es6教程</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.jquery123.com/" rel="nofollow" target="_blank">jQuery中文文档</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://javascript.ruanyifeng.com/" rel="nofollow" target="_blank">js标准参考教程</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://cn.vuejs.org/v2/guide/" rel="nofollow" target="_blank">vue官网</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.css88.com/doc/zeptojs_api/" rel="nofollow" target="_blank">zeptojs中文版</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://code.ciaoca.com/" rel="nofollow">前端开发仓库</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank">深入理解js系列</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links1079723" class="catList sidebar-block">
+<h3 class="catListTitle">常用的插件与UI组件</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="https://www.npmjs.com/package/axios" rel="nofollow" target="_blank">axios请求</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_1" href="http://mint-ui.github.io/#!/zh-cn" rel="nofollow" target="_blank">mint-ui </a> </li>
+
+<li><a id="CatList_LinkList_2_Link_2" href="https://router.vuejs.org/zh-cn/" rel="nofollow" target="_blank">vue-router路由</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_3" href="https://vuex.vuejs.org/zh-cn/" rel="nofollow" target="_blank">vuex状态管理</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_4" href="http://www.xgllseo.com/?p=5720" rel="nofollow" target="_blank">vue相关UI组件收集</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_5" href="https://vux.li/#/zh-CN/README" rel="nofollow" target="_blank">VUX </a> </li>
+
+<li><a id="CatList_LinkList_2_Link_6" href="https://github.com/Tencent/weui/wiki" rel="nofollow" target="_blank">weui github官网实例</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_7" href="http://element.eleme.io/#/zh-CN" rel="nofollow" target="_blank">饿了么element UI</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_8" href="https://weui.io/" rel="nofollow" target="_blank">微信组件weui</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links1061897" class="catList sidebar-block">
+<h3 class="catListTitle">推荐团队与博客</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_3_Link_0" href="http://www.w3cplus.com/" rel="nofollow" target="_blank">w3cplus</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_1" href="http://www.w3school.com.cn/" rel="nofollow" target="_blank">w3school</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_2" href="https://www.qianduan.net/" rel="nofollow" target="_blank">前端观察</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_3" href="https://www.cnblogs.com/TomXu/" rel="nofollow" target="_blank">汤姆大叔博客</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_4" href="http://www.alloyteam.com/" rel="nofollow" target="_blank">腾讯Web前端 Alloy 团队 Blog </a> </li>
+
+<li><a id="CatList_LinkList_3_Link_5" href="http://www.zhangxinxu.com/wordpress/" rel="nofollow" target="_blank">张鑫旭博客</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links998460" class="catList sidebar-block">
+<h3 class="catListTitle">我的常用链接</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_4_Link_0" href="http://imgbase64.duoshitong.com/" rel="nofollow" target="_blank">base64与图片相互转化</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_1" href="http://www.cssmatic.com/box-shadow" rel="nofollow" target="_blank">box-shadow生成工具</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_2" href="https://www.cssreflex.com/css-generators/" rel="nofollow" target="_blank">CSS3 生成器</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_3" href="http://echarts.baidu.com/echarts2/doc/doc.html" rel="nofollow" target="_blank">echarts文档</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_4" href="https://github.com/aui/font-spider" rel="nofollow" target="_blank">font-spider中文字体工具</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_5" href="http://www.gruntjs.net/api/grunt" rel="nofollow" target="_blank">grunt使用</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_6" href="http://json.cn/" rel="nofollow" target="_blank">json格式化</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_7" href="https://github.com/nuysoft/Mock/wiki" rel="nofollow" target="_blank">mock官网</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_8" href="https://doc.webpack-china.org/guides/getting-started/" rel="nofollow" target="_blank">webpack</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_9" href="http://www.iconfont.cn/" rel="nofollow" target="_blank">阿里图标库 </a> </li>
+
+<li><a id="CatList_LinkList_4_Link_10" href="http://fontawesome.io/icons/" rel="nofollow" target="_blank">奥森图标（英）</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_11" href="https://www.thinkcmf.com/font/icons#file-type" rel="nofollow" target="_blank">奥森图标（中）</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_12" href="http://www.cssmatic.com/gradient-generator#&#39;\-moz\-linear\-gradient\%28left\%2C\%20rgba\%28248\%2C80\%2C50\%2C1\%29\%200\%25\%2C\%20rgba\%28241\%2C111\%2C92\%2C1\%29\%2050\%25\%2C\%20rgba\%28246\%2C41\%2C12\%2C1\%29\%2051\%25\%2C\%20rgba\%28240\%2C47\%2C2" rel="nofollow" target="_blank">渐变生成器</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_13" href="https://caniuse.com/" rel="nofollow" target="_blank">浏览器兼容检测工具</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_14" href="https://tinypng.com/" rel="nofollow" target="_blank">图片压缩</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_15" href="http://tongji.baidu.com/data/mobile/device/" rel="nofollow" target="_blank">移动设备市场份额</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	342022
+	</li>
+	<li class="liRank">
+		排名 -	556
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/moqiutao/p/4807792.html">1. CSS总结div中的内容垂直居中的五种方法(122015)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4843437.html">2. CSS3 Filter详解（改变模糊度 亮度 透明度等方法）(23339)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4837364.html">3. HTML5实现video标签的自定义播放进度条(20638)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6366463.html">4. vuejs-指令详解(17381)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6306479.html">5. vue.js插入dom节点的方式(16005)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4912784.html">6. JS的event.srcElement与event.target（触发事件对象）(15397)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/5291881.html">7. CSS3属性-webkit-font-smoothing字体抗锯齿渲染(14944)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6423754.html">8. vuejs2.0使用Sortable.js实现的拖拽功能(14656)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4783526.html">9. CSS之设置滚动条样式(13513)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/5070463.html">10. CSS网页中导入特殊字体@font-face属性详解(12191)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6394681.html">11. vuejs2.0实现一个简单的分页(11361)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/7496718.html">12. webpack+vuecli打包生成资源相对引用路径与背景图片的正确引用(11226)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6388014.html">13. vuejs自定义过滤器根据搜索框输入的值，筛选复杂的列表数据(10833)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6430079.html">14. HTML5效果：Canvas 实现圆形进度条并显示数字百分比(10523)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6382097.html">15. JS中sort()方法的用法，参数以及排序原理(9891)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/moqiutao/p/7496718.html">1. webpack+vuecli打包生成资源相对引用路径与背景图片的正确引用(7)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6365113.html">2. HTML5 拖放（Drag 和 Drop）详解与实例(6)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4753501.html">3. CSS/CSS3常用样式与web移动端资源(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/7337311.html">4. JavaScript易错知识点整理(3)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6275483.html">5. JS按位非(~)运算符与~~运算符的理解分析(3)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/5380613.html">6. Bootstrap CSS 栅格、代码和表格(2)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6408252.html">7. CSS3效果：5种预载动画效果(2)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6366463.html">8. vuejs-指令详解(2)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6366942.html">9. HTML5为输入框添加语音输入功能(2)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4771134.html">10. jQuery实现整屏翻屏效果：jquery.mousewheel（一）(2)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/moqiutao/p/4807792.html">1. CSS总结div中的内容垂直居中的五种方法(9)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4776615.html">2. Web前端研发工程师编程能力飞升之路(8)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/7496718.html">3. webpack+vuecli打包生成资源相对引用路径与背景图片的正确引用(8)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6366463.html">4. vuejs-指令详解(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6365113.html">5. HTML5 拖放（Drag 和 Drop）详解与实例(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4753839.html">6. CSS3的媒体查询(Media Queries)与移动设备显示尺寸大全(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4854221.html">7. 五个有用的jquery小技巧(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/5093861.html">8. JS数组常用方法汇总(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6408252.html">9. CSS3效果：5种预载动画效果(5)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6423754.html">10. vuejs2.0使用Sortable.js实现的拖拽功能(4)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/6561717.html">11. 学习资源分享清单(4)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4766146.html">12. web前端常用代码与面试等资源整理(4)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4753501.html">13. CSS/CSS3常用样式与web移动端资源(3)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/8037549.html">14. 容易遗忘的JS知识点整理(3)</a></li><li><a href="https://www.cnblogs.com/moqiutao/p/4837364.html">15. HTML5实现video标签的自定义播放进度条(3)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	<div class="parentsDiv"><div class="directoryDiv" style="height: 879px; display: none;"><div class="catListTitle">文章目录</div><div class="dirInner" style="top: 0px;"><div class="highlight-title" style="height: 0px; top: 1274px;"></div><div class="listCon"><ul data-level="1" class="nav"><li class="active-current"><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader0" id="articleHeader0">一.什么是组件？</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader1" id="articleHeader1">二.注册组件</a><ul data-level="2"><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader2" id="articleHeader2">全局注册</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader3" id="articleHeader3">局部注册</a></li></ul></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader4" id="articleHeader4">三.Prop</a><ul data-level="2"><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader5" id="articleHeader5">使用 Prop 传递数据</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader6" id="articleHeader6">动态 Prop</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader7" id="articleHeader7">字面量语法 vs 动态语法</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader8" id="articleHeader8">单向数据流</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader9" id="articleHeader9">Prop 验证</a></li></ul></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader10" id="articleHeader10">四.非Prop特性</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader11" id="articleHeader11">五.自定义事件</a><ul data-level="2"><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader12" id="articleHeader12">使用 v-on 绑定自定义事件</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader13" id="articleHeader13">给组件绑定原生事件.native</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader14" id="articleHeader14">.sync 修饰符(2.3.0+)</a></li><li class=""><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader15" id="articleHeader15">使用自定义事件的表单输入组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader16" id="articleHeader16">自定义组件的 v-model（2.2.0 新增）</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader17" id="articleHeader17">非父子组件的通信</a></li></ul></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader18" id="articleHeader18">六.使用插槽slot分发内容</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader19" id="articleHeader19">单个插槽</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader20" id="articleHeader20">具名插槽</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader21" id="articleHeader21">作用域插槽(2.1.0 新增)</a></li></ul></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader22" id="articleHeader22">七.动态组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader23" id="articleHeader23">keep-alive</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader24" id="articleHeader24">八.杂项</a><ul data-level="2"><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader25" id="articleHeader25">编写可复用组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader26" id="articleHeader26">子组件引用</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader27" id="articleHeader27">异步组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader28" id="articleHeader28">高级异步组件(2.3.0 新增)</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader29" id="articleHeader29">组件命名约定</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader30" id="articleHeader30">递归组件</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader31" id="articleHeader31">组件间的循环引用</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader32" id="articleHeader32">X-Template</a></li><li><a href="http://www.cnblogs.com/moqiutao/p/8328931.html#articleHeader33" id="articleHeader33">对低开销的静态组件使用 v-once</a></li></ul></li></ul></div></div></div></div></div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 风雨后见彩虹
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<style>
+#footer{border-top:0; color: #666;margin-top:0;}
+</style>
+<style type="text/css">
+	.article-btm{position:fixed;right:10px;bottom:10px;z-index:99999}
+	.article-btm-line{background-color: #3dbb2b;width:50px;height:50px;position:relative;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;cursor:pointer;margin-top: 5px;}
+	.article-btm-line .ico{position:absolute;left:50%;margin-left:-18px;top:50%;margin-top:-18px;width:36px;height:36px;background-repeat:no-repeat;background-repeat:no-repeat;background: url(http://images.cnblogs.com/cnblogs_com/moqiutao/740438/o_o_o_article-btm-line.png) 0 0 no-repeat;overflow: hidden;}
+	.article-btm-line .ico-directory{
+	background-position: 0 0;
+	-webkit-animation: ani-ico 6s linear 1s 4;
+	animation: ani-ico 6s linear 1s 4;
+	}
+	.article-btm-line .ico-bubble{
+	background-position: 0 -36px;
+	-webkit-animation: ani-ico 6s linear 1.5s 4;
+	animation: ani-ico 6s linear 1.5s 4;
+	}
+	.article-btm-line .ico-star{
+	background-position: 0 -72px;
+	-webkit-animation: ani-ico 6s linear 2s 4;
+	animation: ani-ico 6s linear 2s 4;
+	}
+	.article-btm-line .ico-move-up{
+	background-position: 0 -108px;
+	-webkit-animation: ani-ico 6s linear 2.5s 4;
+	animation: ani-ico 6s linear 2.5s 4;
+	}
+	.article-btm-line .ico-move-down{
+	background-position: 0 -144px;
+	-webkit-animation: ani-ico 6s linear 3s 4;
+	animation: ani-ico 6s linear 3s 4;
+	}
+	@-webkit-keyframes ani-ico {
+	    0% { -webkit-transform: rotate(0deg);}
+	    0.5% { -webkit-transform: rotate(-15deg);}
+	    1% { -webkit-transform: rotate(0);}
+	    1.5% { -webkit-transform: rotate(15deg);}
+	    2% { -webkit-transform: rotate(0);}
+	    2.5% { -webkit-transform: rotate(-15deg);}
+	    3% { -webkit-transform: rotate(0);}
+	    3.5% { -webkit-transform: rotate(15deg);}
+	    4% { -webkit-transform: rotate(0);}
+	    100% { -webkit-transform: rotate(0);}
+	}
+	@keyframes ani-ico {
+	    0% { transform: rotate(0deg);}
+	    0.5% { transform: rotate(-15deg);}
+	    1% { transform: rotate(0);}
+	    1.5% { transform: rotate(15deg);}
+	    2% { transform: rotate(0);}
+	    2.5% { transform: rotate(-15deg);}
+	    3% { transform: rotate(0);}
+	    3.5% { transform: rotate(15deg);}
+	    4% { transform: rotate(0);}
+	    100% { transform: rotate(0);}
+	}
+	
+	.article-btm-line:hover{background-color: #3c6f1d;-webkit-transition:background-color .2s linear;-moz-transition:background-color .2s linear;-ms-transition:background-color .2s linear;-o-transition:background-color .2s linear;transition:background-color .2s linear}
+	.article-btm-line:hover .txt{
+	display: block;
+	-webkit-animation: ani-ico-txt .2s linear 1 forwards;
+	animation: ani-ico-txt .2s linear 1 forwards;
+	}
+	@-webkit-keyframes ani-ico-txt {
+	    0% { opacity: .8;-webkit-transform: translate(50px, 0);}
+	    100% { opacity: 1;-webkit-transform: translate(5px, 0);}
+	}
+	@keyframes ani-ico-txt {
+	    0% { opacity: .8;transform: translate(50px, 0);}
+	    100% { opacity: 1;transform: translate(5px, 0);}
+	}
+	
+	.article-btm-line .txt{display: none;position:absolute;height:50px;line-height:50px;padding:0 15px 0 10px;white-space:nowrap;top:50%;margin-top:-25px;right:50px;color:#fff;-webkit-border-radius:5px 0 0 5px;-moz-border-radius:5px 0 0 5px;border-radius:5px 0 0 5px;background-color:#3C6F1D;opacity: 0;}
+</style>
+
+<style>
+.reward-btn-info {
+    width: 75pt;
+    border-radius: 5px;
+    background-color: #4baa1b;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 40px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.reward-btn-info:hover,.reward-btn-info:active{
+   background-color:#390;
+}
+
+.reward-wrap-con {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 600px;
+    height: 360px;
+    border-radius: 0;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 0 125pc rgba(0,0,0,.5);
+    transform: translate(-50%,-50%);
+   z-index:999999;
+}
+.reward-btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    color: #999;
+    font-size: 30px;
+    cursor: pointer;
+    transform: rotate(45deg);
+}
+#cnblogs_post_body .reward-wrap-con h2 {
+    margin: 10px 0;
+    color: #666;
+    text-align: center;
+    font-weight: bold;
+    font-size: 21px;
+   border-bottom:0;
+}
+.reward-wrap-con .wechat, .reward-wrap-con .zhifubao {
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 15pc;
+    height: 15pc;
+    border: 5px solid #ff7300;
+    border-radius: 10px;
+}
+
+.reward-wrap-con .wechat img,.reward-wrap-con .zhifubao img{
+	width:210px;
+	height:210px;
+}
+.wechat, .zhifubao {
+    margin-left: 40px;
+}
+.wechat:after, .zhifubao:after {
+    position: absolute;
+    top: 220px;
+    left: 50px;
+    padding: 0 10px;
+    width: 90pt;
+    background: #fff;
+    color: #666;
+    content: "微信，扫一扫";
+    text-align: center;
+    font-size: 1pc;
+}
+.zhifubao:after {
+    content: "支付宝，扫一扫";
+}
+</style>
+<script type="text/javascript">
+   $(function(){
+     var tttString='<div class="content">'+
+		'<div>作者：<a href="http://www.cnblogs.com/moqiutao/" target="_blank">风雨后见彩虹</a></div>'+
+                 '<div>github：<a href="https://github.com/hxlmqtily1314" target="_blank">https://github.com/hxlmqtily1314</a></div>'+
+			'<div>如果觉得文章写得不错或对您有用，请随意打赏。点击文章右下角<span style="color:red;font-weight:bold;">“喜欢”</span>二字，您的支持是我最大的鼓励</div>'+
+			 '<div class="reward-btn-info">打赏支持</div>'+
+		'</div>';
+  
+var rewardCon = '<div class="reward-wrap-con">'+
+	                    '<div class="reward-btn-close">+</div>'+
+	                    '<h2>(^_^)打赏作者喝个咖啡(^_^)</h2>'+
+	                    '<div class="wechat"><img src="https://files.cnblogs.com/files/moqiutao/m_weixin.gif" alt="微信支付"></div>'+
+	                    '<div class="zhifubao"><img src="https://files.cnblogs.com/files/moqiutao/m_zhifubao.gif" alt="支付宝支付">'+
+                            '</div>'+
+	                '</div>';
+	
+$("#cnblogs_post_body").append(rewardCon);
+
+var article_btm='<div class="article-btm">'+
+	'<div class="article-btm-line" id="showdirectory">'+            
+        '<div class="ico ico-directory showdirectoryBtn"></div>'+
+        '<div class="txt showdirectory">显示目录</div>'+         
+    '</div>'+
+    '<div class="article-btm-line">'+            
+        '<div class="ico ico-star" onclick="AddToWz(cb_entryId)"></div>'+
+        '<div class="txt" onclick="AddToWz(cb_entryId)">我要收藏</div>'+         
+    '</div>'+
+    '<div class="article-btm-line">'+          
+        '<div class="ico ico-move-up" id="totop"></div>'+
+        '<div class="txt" id="totop">返回顶部</div>'+
+    '</div>'+
+    '<div class="article-btm-line">'+          
+        '<div class="ico ico-move-down" id="toBottom"></div>'+
+        '<div class="txt" id="toBottom">跳到底部</div>'+
+    '</div>'+
+'</div>';
+    $(".buryit").hide();
+     $("#MySignature").show();
+     $("#MySignature").append(tttString);
+   	$("#MySignature").append(article_btm);
+ 	var totop = $('#totop');
+    $(totop).on("click",function(){
+        $('html, body').animate({scrollTop:0}, 500); return false;
+    });
+
+    var toBottom = $('#toBottom');
+    $(toBottom).on("click",function(){
+        var scrollBottom = $(document).height() - $(window).height() 
+        $('html, body').animate({scrollTop:scrollBottom}, 500); return false;
+    });
+   
+
+   $('.reward-btn-info').on('click', function(event) {
+	 $('.reward-wrap-con').fadeIn(300);
+  });
+
+  $('.reward-btn-close').on('click', function(event) {
+	 $('.reward-wrap-con').fadeOut(300);
+ });
+
+ if(!$('#sideBar .parentsDiv').length){
+
+    $("#showdirectory").remove();
+}
+ $('#showdirectory').on('click',function(){
+	var wT = $(window).scrollTop();
+	if($(this).hasClass('current')){
+		$(this).removeClass('current');
+		$(this).find('.showdirectory').html('显示目录');
+		$('#sideBar .directoryDiv').hide();
+		$("#sideBarMain").show();
+	}else{
+		$(this).addClass('current');
+		$(this).find('.showdirectory').html('隐藏目录');
+		if(wT > 80){
+			$('#sideBar .directoryDiv').show();
+			$("#sideBarMain").hide();
+		}else{
+			$('#sideBar .directoryDiv').hide();
+			$("#sideBarMain").show();
+		}
+	}
+ });
+
+});
+
+</script>
+<!--PageEndHtml Block End-->
+
+
+<div class="sogoutip" style="z-index: 2147483645; visibility: hidden; display: none;"></div><div class="sogoubottom" id="sougou_bottom" style="display: none;"></div><div id="ext_stophi" style="z-index: 2147483647;"><div class="extnoticebg"></div><div class="extnotice"><h2>关闭提示 <a href="http://www.cnblogs.com/moqiutao/p/8328931.html#" title="关闭提示" id="closenotice" class="closenotice">关闭</a></h2><p id="sogouconfirmtxt"></p>  <a id="sogouconfirm" href="http://www.cnblogs.com/moqiutao/p/8328931.html#" class="extconfirm">确 认</a> <a id="sogoucancel" href="http://www.cnblogs.com/moqiutao/p/8328931.html#" class="extconfirm">取 消</a></div></div><div id="ext_overlay" class="ext_overlayBG" style="display: none; z-index: 2147483646;"></div><iframe class="sogou_sugg_feedbackquan" frameborder="0" scrolling="no" src="./vue从入门到进阶：组件Component详解（六） - 风雨后见彩虹 - 博客园_files/yun6.html" style="background: transparent; border: none; display: none; height: 84px; width: 100%; z-index: 2147483645;"></iframe></body></html>

@@ -1,0 +1,81 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#111111",
+        "activityBarBadge.background": "#FFA000",
+        "list.activeSelectionForeground": "#FFA000",
+        "list.inactiveSelectionForeground": "#FFA000",
+        "list.highlightForeground": "#FFA000",
+        "scrollbarSlider.activeBackground": "#FFA00050",
+        "editorSuggestWidget.highlightForeground": "#FFA000",
+        "textLink.foreground": "#FFA000",
+        "progressBar.background": "#FFA000",
+        "pickerGroup.foreground": "#FFA000",
+        "tab.activeBorder": "#FFA000",
+        "notificationLink.foreground": "#FFA000",
+        "editorWidget.resizeBorder": "#FFA000",
+        "editorWidget.border": "#FFA000",
+        "settings.modifiedItemIndicator": "#FFA000",
+        "settings.headerForeground": "#FFA000",
+        "panelTitle.activeBorder": "#FFA000",
+        "breadcrumb.activeSelectionForeground": "#FFA000",
+        "menu.selectionForeground": "#FFA000",
+        "menubar.selectionForeground": "#FFA000"
+    },
+    // 在一定数量的等宽字符后显示垂直标尺。输入多个值，显示多个标尺。若数组为空，则不绘制标尺。
+    "editor.rulers": [300],
+    //一个制表符等于的空格数。该设置在`editor.detectIndentation` 
+    "editor.tabSize": 4,
+    "editor.fontSize": 14,
+    "editor.lineHeight": 24,
+    // These are for subliminal, check them out.
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.lineNumbers": "on",
+    "editor.overviewRulerBorder": false,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "none",
+    "editor.quickSuggestions": true,
+    // end subliminal changes
+    "editor.fontFamily": "'Fira Code', 'Operator Mono', 'iA Writer Duospace', 'Source Code Pro', Menlo, Monaco, monospace",
+    "vsicons.projectDetection.autoReload": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.fontLigatures": true,
+    "prettier.tabWidth": 4,
+    "editor.wordWrap": "on",
+    "editor.detectIndentation": true,
+    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "editor.minimap.enabled": false,
+    "editor.minimap.renderCharacters": false,
+    "prettier.parser": "flow",
+    "workbench.editor.enablePreview": false,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "jsx-sublime-babel-tags": "javascriptreact"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.showExpandedAbbreviation": "never",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "workbench.editor.showIcons": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "explorer.confirmDelete": false,
+    "window.zoomLevel": 0,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "materialTheme.accent": "Yellow",
+    "editor.cursorBlinking": "smooth",
+    "workbench.colorTheme": "Eclipse",
+    "vetur.format.defaultFormatterOptions": {
+        "js-beautify-html": {
+            "wrap_attributes": "aligned-multiple"
+        },
+        "prettyhtml": {
+            "printWidth": 100,
+            "singleQuote": false,
+            "wrapAttributes": false,
+            "sortAttributes": false
+        }
+    },
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.fontWeight": "500"
+}

@@ -1,0 +1,56 @@
+https://download.csdn.net/download/lrtao2010/10588571   python2.7.15 Windows 64位免安装版
+
+pip install mongo-connector[elastic6]
+
+F:\apidocument\elastic2-doc-manager
+
+pip install F:\apidocument\elastic2-doc-
+
+pip install --proxy http://ip:port --index http://mirrors.aliyun.com/pypi/simple/ elastic2-doc-manager[elastic5] --trusted-host mirrors.aliyun.com
+
+mongo-connector -m localhost:27017 -a test_user -p test_password -t localhost:9200 -d elastic2_doc_manager
+
+
+
+mongod --dbpath "F:\mongonDB\data" --logpath "F:\mongonDB\log\mongodb.log" --logappend --serviceName MongoDB --auth --install
+
+mongod --dbpath "F:\mongonDB\data"
+mongod --dbpath "F:\mongonDB\log\mongodb.log"
+
+sc.exe create MongoDB binpath="F:\MongoDB\bin\mongod.exe --service --config=F:\MongoDB\mongod.cfg"
+
+mongod --config "F:\mongonDB\mongod.cfg"  --serviceName MongoDB --auth --install
+
+mongod  --serviceName MongoDB --auth --install
+
+
+mongod --config c:\mongodb\mongod.cfg --dbpath c:\mongodb\data\db --install
+
+mongod --install --config F:\mongonDB\mongod.cfg --dbpath c:\mongodb\data\db\\
+
+
+mongod --config "F:\mongonDB\mongod.cfg" --logappend --serviceName MongoDB --auth --install
+
+mongod -dbpath "F:\mongonDB\data\db" -logpath "F:\mongonDB\log\mongodb.log" -install -serviceName "MongoDB"
+
+mongod -dbpath "F:\mongonDB\data" -logpath "F:\mongonDB\log\mongodb.log" -auth -install -serviceName "MongoDB"
+
+echo logpath=F:\mongonDB\log\mongodb.log> "F:\mongonDB\mongod.cfg"
+
+echo dbpath=F:\mongonDB\data>> "F:\mongonDB\mongod.cfg"
+
+sc.exe create MongoDB binpath="F:\mongonDB\bin\mongod.exe --service --config=F:\mongonDB\mongod.cfg"
+
+sc.exe create MongoDB binpath="F:\mongonDB\bin\mongod.exe --service --config=F:\mongonDB\mongod.cfg"
+
+sc config MongoDB start= auto
+
+sc create elasticsearch binPath= "F:\elasticsearch-6.5.1\bin\elasticsearch.bat"
+
+
+sc create kibana binPath= "F:\kibana-6.5.1-windows-x86_64\bin\kibana.bat"
+
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8100 -j REDIRECT --to-port 5601
+
+netstat -ano|findstr 5601
+ taskkill /f /t /im  5328
